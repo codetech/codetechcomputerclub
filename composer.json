@@ -1,0 +1,22 @@
+{
+	"name": "codetechcomputerclub",
+	"repositories": [
+		{
+			"type": "pear",
+			"url": "http://pear.cakephp.org"
+		}
+	],
+	"require": {
+		"cakephp/debug_kit": "2.2.*",
+		"ezyang/htmlpurifier": "4.6.*",
+		"pear-cakephp/cakephp": "2.4.*"
+	},
+	"config": {
+		"vendor-dir": "vendors"
+	},
+	"extra": {
+        "installer-paths": {
+            "app/Plugin/{$name}": ["cakephp/debug_kit"]
+        }
+    }
+}

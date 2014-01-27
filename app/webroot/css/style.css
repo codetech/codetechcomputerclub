@@ -1,0 +1,554 @@
+@import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,300,200);
+@import url(http://fonts.googleapis.com/css?family=Lobster);
+
+/*
+	Halcyonic 3.0 by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+*/
+
+/*********************************************************************************/
+/* Global                                                                        */
+/*********************************************************************************/
+
+/* Basic */
+
+	body
+	{
+		background: #D4D9DD url('images/bg03.jpg');
+	}
+
+	body, input, textarea, select
+	{
+		color: #474f51;
+		font-size: 13.5pt;
+		font-family: 'Yanone Kaffeesatz';
+		line-height: 1.85em;
+		font-weight: 300;
+	}
+
+	/*ul, ol,*/ p, dl
+	{
+		margin: 0 0 2em 0;
+	}
+
+	a
+	{
+		text-decoration: underline;
+	}
+	
+	a:hover
+	{
+		text-decoration: none;
+	}
+
+	section > :last-child, .last-child
+	{
+		margin-bottom: 0 !important;
+	}
+
+/* Multi-use */
+	
+	.link-list
+	{
+	}
+	
+		.link-list li
+		{
+			padding: 0.2em 0 0.2em 0;
+		}
+		
+		.link-list li:first-child
+		{
+			padding-top: 0 !important;
+			border-top: 0 !important;
+		}
+		
+		.link-list li:last-child
+		{
+			padding-bottom: 0 !important;
+			border-bottom: 0 !important;
+		}
+
+		#content .link-list li
+		{
+			border-bottom: solid 1px #e2e6e8;
+		}
+
+		#footer .link-list li
+		{
+			border-top: solid 1px #e0e4e6;
+			border-bottom: solid 1px #b5bec3;
+		}
+
+	.quote-list
+	{
+	}
+	
+		.quote-list li
+		{
+			padding: 1em 0 1em 0;
+			overflow: hidden;
+		}
+		
+		.quote-list li:first-child
+		{
+			padding-top: 0 !important;
+			border-top: 0 !important;
+		}
+
+		.quote-list li:last-child
+		{
+			padding-bottom: 0 !important;
+			border-bottom: 0 !important;
+		}
+
+			.quote-list li img
+			{
+				float: left;
+			}
+
+			.quote-list li p
+			{
+				margin: 0 0 0 90px;
+				font-size: 1.2em;
+				font-style: italic;
+			}
+			
+			.quote-list li span
+			{
+				display: block;
+				margin-left: 90px;
+				font-size: 0.9em;
+				font-weight: 400;
+			}
+
+		#content .quote-list li
+		{
+			border-bottom: solid 1px #e2e6e8;
+		}
+
+		#footer .quote-list li
+		{
+			border-top: solid 1px #e0e4e6;
+			border-bottom: solid 1px #b5bec3;
+		}
+	
+	.check-list
+	{
+	}
+
+		.check-list li
+		{
+			padding: 0.7em 0 0.7em 45px;
+			font-size: 1.2em;
+			background: url('images/icon-checkmark.png') 0px 1.05em no-repeat;
+		}
+		
+		.check-list li:first-child
+		{
+			padding-top: 0 !important;
+			border-top: 0 !important;
+			background-position: 0 0.3em;
+		}
+
+		.check-list li:last-child
+		{
+			padding-bottom: 0 !important;
+			border-bottom: 0 !important;
+		}
+
+		#content .check-list li
+		{
+			border-bottom: solid 1px #e2e6e8;
+		}
+
+		#footer .check-list li
+		{
+			border-top: solid 1px #e0e4e6;
+			border-bottom: solid 1px #b5bec3;
+		}
+		
+	.feature-image
+	{
+		display: block;
+		margin: 0 0 2em 0;
+		outline: 0;
+	}
+	
+		.feature-image img
+		{
+			display: block;
+			width: 100%;
+		}
+
+	.bordered-feature-image
+	{
+		display: block;
+		background: #fff url('images/bg04.png');
+		padding: 10px;
+		box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.15);
+		margin: 0 0 1.5em 0;
+		outline: 0;
+	}
+	
+		.bordered-feature-image img
+		{
+			display: block;
+			width: 100%;
+		}
+	
+	/*.button-big
+	{
+		display: inline-block;
+		background: #ed391b;
+		color: #fff;
+		text-decoration: none;
+		font-size: 1.75em;
+		font-weight: 300;
+		padding: 15px 45px 15px 45px;
+		outline: 0;
+		border-radius: 10px;
+		box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.75), inset 0px 2px 0px 0px rgba(255,192,192,0.5), inset 0px 0px 0px 2px rgba(255,96,96,0.85), 3px 3px 3px 1px rgba(0,0,0,0.15);
+		background-image: -moz-linear-gradient(top, #ed391b, #ce1a00);
+		background-image: -webkit-linear-gradient(top, #ed391b, #ce1a00);
+		background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ed391b), to(#ce1a00));
+		background-image: -ms-linear-gradient(top, #ed391b, #ce1a00);
+		background-image: -o-linear-gradient(top, #ed391b, #ce1a00);
+		background-image: linear-gradient(top, #ed391b, #ce1a00);
+		text-shadow: -1px -1px 1px rgba(0,0,0,0.5);
+	}
+
+	.button-big:hover
+	{
+		background: #fd492b;
+		box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.75), inset 0px 2px 0px 0px rgba(255,192,192,0.5), inset 0px 0px 0px 2px rgba(255,96,96,0.85), 3px 3px 3px 1px rgba(0,0,0,0.15);
+		background-image: -moz-linear-gradient(top, #fd492b, #de2a10);
+		background-image: -webkit-linear-gradient(top, #fd492b, #de2a10);
+		background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fd492b), to(#de2a10));
+		background-image: -ms-linear-gradient(top, #fd492b, #de2a10);
+		background-image: -o-linear-gradient(top, #fd492b, #de2a10);
+		background-image: linear-gradient(top, #fd492b, #de2a10);
+	}
+
+	.button-big:active
+	{
+		background: #ce1a00;
+		box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.75), inset 0px 2px 0px 0px rgba(255,192,192,0.5), inset 0px 0px 0px 2px rgba(255,96,96,0.85), 3px 3px 3px 1px rgba(0,0,0,0.15);
+		background-image: -moz-linear-gradient(top, #ce1a00, #ed391b);
+		background-image: -webkit-linear-gradient(top, #ce1a00, #ed391b);
+		background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ce1a00), to(#ed391b));
+		background-image: -ms-linear-gradient(top, #ce1a00, #ed391b);
+		background-image: -o-linear-gradient(top, #ce1a00, #ed391b);
+		background-image: linear-gradient(top, #ce1a00, #ed391b);
+	}*/
+	
+	/* Our new blue button */
+	.button-big,
+	.button-small
+	{
+		display: inline-block;
+		background: #009ef9;
+		font-family: 'SciFly', sans-serif;
+		color: #fff !important;
+		text-decoration: none;
+		outline: 0;
+		box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.75), inset 0px 2px 0px 0px rgba(113,203,255,0.3), inset 0px 0px 0px 2px rgba(79,191,255,0.75), 3px 3px 3px 1px rgba(0,0,0,0.15);
+		background-image: -moz-linear-gradient(top, #009ef9, #007ec6);
+		background-image: -webkit-linear-gradient(top, #009ef9, #007ec6);
+		background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#009ef9), to(#007ec6));
+		background-image: -ms-linear-gradient(top, #009ef9, #007ec6);
+		background-image: -o-linear-gradient(top, #009ef9, #007ec6);
+		background-image: linear-gradient(top, #009ef9, #007ec6);
+		text-shadow: -1px -1px 1px rgba(0,0,0,0.5);
+	}
+	
+	.button-big
+	{
+		font-size: 2em;
+		font-weight: 300;
+		padding: 15px 45px 15px 45px;
+		border-radius: 10px;
+	}
+	
+	.button-small
+	{
+		font-size: 1.5em;
+		font-weight: 300;
+		padding: 10px 25px 10px 25px;
+		border-radius: 5px;
+	}
+
+	.button-big:hover,
+	.button-small:hover
+	{
+		background: #3eb8ff;
+		background-image: -moz-linear-gradient(top, #3eb8ff, #0ba6ff);
+		background-image: -webkit-linear-gradient(top, #3eb8ff, #0ba6ff);
+		background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3eb8ff), to(#0ba6ff));
+		background-image: -ms-linear-gradient(top, #3eb8ff, #0ba6ff);
+		background-image: -o-linear-gradient(top, #3eb8ff, #0ba6ff);
+		background-image: linear-gradient(top, #3eb8ff, #0ba6ff);
+	}
+
+	.button-big:active,
+	.button-small:active
+	{
+		background: #007ec6;
+		background-image: -moz-linear-gradient(top, #007ec6, #009ef9);
+		background-image: -webkit-linear-gradient(top, #007ec6, #009ef9);
+		background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#007ec6), to(#009ef9));
+		background-image: -ms-linear-gradient(top, #007ec6, #009ef9);
+		background-image: -o-linear-gradient(top, #007ec6, #009ef9);
+		background-image: linear-gradient(top, #007ec6, #009ef9);
+	}
+
+
+/******************************************************************************/
+/* Custom                                                                     */
+/******************************************************************************/
+
+/*
+ * Fonts
+ * Generated by fontsquirrel.com
+ */
+
+/* http://www.fontsquirrel.com/license/scifly */
+@font-face {
+    font-family: 'SciFly';
+    src: url('../fonts/scifly/scifly-sans-webfont.eot');
+    src: url('../fonts/scifly/scifly-sans-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/scifly/scifly-sans-webfont.woff') format('woff'),
+         url('../fonts/scifly/scifly-sans-webfont.ttf') format('truetype'),
+         url('../fonts/scifly/scifly-sans-webfont.svg#sciflysans') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* http://www.fontsquirrel.com/license/laconic */
+@font-face {
+    font-family: 'Laconic';
+    src: url('../fonts/laconic/laconic_regular-webfont.eot');
+    src: url('../fonts/laconic/laconic_regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/laconic/laconic_regular-webfont.woff') format('woff'),
+         url('../fonts/laconic/laconic_regular-webfont.ttf') format('truetype'),
+         url('../fonts/laconic/laconic_regular-webfont.svg#laconicregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Laconic';
+    src: url('../fonts/laconic/laconic_bold-webfont.eot');
+    src: url('../fonts/laconic/laconic_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/laconic/laconic_bold-webfont.woff') format('woff'),
+         url('../fonts/laconic/laconic_bold-webfont.ttf') format('truetype'),
+         url('../fonts/laconic/laconic_bold-webfont.svg#laconicbold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+/* To use the "light" version, specify a font-weight of 200 or use
+ * the .light class */
+@font-face {
+    font-family: 'Laconic';
+    src: url('../fonts/laconic/laconic_light-webfont.eot');
+    src: url('../fonts/laconic/laconic_light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/laconic/laconic_light-webfont.woff') format('woff'),
+         url('../fonts/laconic/laconic_light-webfont.ttf') format('truetype'),
+         url('../fonts/laconic/laconic_light-webfont.svg#laconiclight') format('svg');
+    font-weight: 200;
+    font-style: normal;
+}
+
+/* http://dejavu-fonts.org/wiki/License */
+@font-face {
+    font-family: 'DejaVu Sans Mono';
+    src: url('../fonts/dejavusansmono/dejavusansmono-webfont.eot');
+    src: url('../fonts/dejavusansmono/dejavusansmono-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/dejavusansmono/dejavusansmono-webfont.woff') format('woff'),
+         url('../fonts/dejavusansmono/dejavusansmono-webfont.ttf') format('truetype'),
+         url('../fonts/dejavusansmono/dejavusansmono-webfont.svg#dejavu_sans_monobook') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'DejaVu Sans Mono';
+    src: url('../fonts/dejavusansmono/dejavusansmono-bold-webfont.eot');
+    src: url('../fonts/dejavusansmono/dejavusansmono-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/dejavusansmono/dejavusansmono-bold-webfont.woff') format('woff'),
+         url('../fonts/dejavusansmono/dejavusansmono-bold-webfont.ttf') format('truetype'),
+         url('../fonts/dejavusansmono/dejavusansmono-bold-webfont.svg#dejavu_sans_monobold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'DejaVu Sans Mono';
+    src: url('../fonts/dejavusansmono/dejavusansmono-oblique-webfont.eot');
+    src: url('../fonts/dejavusansmono/dejavusansmono-oblique-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/dejavusansmono/dejavusansmono-oblique-webfont.woff') format('woff'),
+         url('../fonts/dejavusansmono/dejavusansmono-oblique-webfont.ttf') format('truetype'),
+         url('../fonts/dejavusansmono/dejavusansmono-oblique-webfont.svg#dejavu_sans_monooblique') format('svg');
+    font-weight: normal;
+    font-style: italic;
+}
+
+/* Syntax highlighting */
+pre {
+	margin: .25em;
+	white-space: pre-wrap;
+}
+pre code {
+	font-family: 'DejaVu Sans Mono';
+	font-size: 14px;
+	line-height: 1.1em;
+}
+
+/* Echoed HTML */
+.echoed-html p, .echoed-html dl {
+	margin: 0;
+}
+
+/* Theme styling */
+h1 {
+	font-weight: normal;
+}
+h2, h3 {
+	font-weight: 300;
+}
+fieldset {
+	border: none;
+}
+.link-list,
+.quote-list,
+.check-list {
+	list-style: none;
+	padding-left: 0;
+}
+
+/* Helper Classes */
+.clearfix:before,
+.clearfix:after {
+	content: " "; /* 1 */
+	display: table; /* 2 */
+}
+.clearfix:after {
+	clear: both;
+}
+
+.light {
+	font-weight: 200;
+}
+.center {
+	width: 100%;
+	text-align: center;
+}
+.overflowable {
+	overflow-x: scroll;
+}
+.right-align {
+	text-align: right;
+}
+img.middle {
+	vertical-align: middle;
+}
+.margin-auto {
+	margin: 0 auto;
+}
+
+table.bordered-table,
+.bordered-table tr,
+.bordered-table th,
+.bordered-table td {
+	border: 1px solid #ccc;
+	text-align: center;
+}
+.bordered-table th {
+	font-weight: bold;
+}
+.bordered-table th,
+.bordered-table td {
+	padding: 10px;
+}
+
+/* Inputs */
+.input:not(.checkbox) label {
+	display: block;
+}
+
+/* Header */
+#header,
+#banner-copy {
+	font-family: 'Laconic';
+}
+#header-wrapper {
+	background: #3B4346 url('images/black-orchid.jpg') !important;
+}
+
+/* Logo */
+#logo {
+	margin: 0;
+	line-height: .7em;
+}
+#logo-link {
+	display: inline-block;
+	text-decoration: none;
+}
+#logo-code {
+	font-family: 'DejaVu Sans Mono', serif;
+	font-size: 1.2em;
+	color: #fff;
+}
+#logo-tech {
+	font-family: 'SciFly', sans-serif;
+	font-size: 1.7em;
+	color: #009ef9;
+}
+#logo-computer-club {
+	font-family: 'Laconic';
+	font-size: .7em;
+	color: #ccc;
+}
+
+/* Paging */
+/* Taken from cake.generic.css */
+.paging {
+	background: #fff;
+	color: #ccc;
+	margin-top: 1em;
+	clear: both;
+}
+.paging .current,
+.paging .disabled,
+.paging a {
+	text-decoration: none;
+	padding: 5px 8px;
+	display: inline-block
+}
+.paging > span {
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-left: 0;
+}
+.paging > span:hover {
+	background: #efefef;
+}
+.paging .prev {
+	border-left: 1px solid #ccc;
+	-moz-border-radius: 4px 0 0 4px;
+	-webkit-border-radius: 4px 0 0 4px;
+	border-radius: 4px 0 0 4px;
+}
+.paging .next {
+	-moz-border-radius: 0 4px 4px 0;
+	-webkit-border-radius: 0 4px 4px 0;
+	border-radius: 0 4px 4px 0;
+}
+.paging .disabled {
+	color: #ddd;
+}
+.paging .disabled:hover {
+	background: transparent;
+}
+.paging .current {
+	background: #efefef;
+	color: #c73e14;
+}
