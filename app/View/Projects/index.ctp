@@ -2,7 +2,7 @@
 
 <section>
 	<header>
-		<h2><?php echo __('Projects'); ?></h2>
+		<h2>Projects</h2>
 		<h3>Welcome to codeTech's Project Portfolio. Check out all the cool stuff we've been making!</h3>
 	</header>
 </section>
@@ -16,6 +16,7 @@
 				<section>
 					<b><?php echo h($project['Project']['title']); ?></b><br>
 					<?php echo h($project['Project']['excerpt']); ?><br>
+					<i>Last Updated: <?php echo $this->Time->format('M j, Y', $project['Project']['modified']); ?></i><br>
 					<?php echo $this->Html->link(__('View'), array('action' => 'view', $project['Project']['id'])); ?> 
 					<?php if ($isAdmin): ?>
 						<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $project['Project']['id'])); ?>
@@ -38,13 +39,19 @@
 					echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
 				?>
 			</div>
-			
-			<?php if ($loggedIn): ?>
-				<h3><?php echo __('Actions'); ?></h3>
-				<ul>
-					<li><?php echo $this->Html->link(__('New Project'), array('action' => 'add')); ?></li>
-				</ul>
-			<?php endif; ?>
 		</section>
 	</div>
 </div>
+
+<?php if ($loggedIn): ?>
+	<div class="row">
+		<div class="12u">
+			<section>
+				<h2><?php echo __('Actions'); ?></h2>
+				<ul>
+					<li><?php echo $this->Html->link(__('New Project'), array('action' => 'add')); ?></li>
+				</ul>
+			</section>
+		</div>
+	</div>
+<?php endif; ?>

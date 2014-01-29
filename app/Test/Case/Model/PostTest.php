@@ -16,7 +16,8 @@ class PostTest extends CakeTestCase {
 		'app.post',
 		'app.project',
 		'app.user',
-		'app.comment'
+		'app.comment',
+		'app.projects_user'
 	);
 
 /**

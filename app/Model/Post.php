@@ -42,16 +42,6 @@ class Post extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'excerpt' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
 		'published' => array(
 			'boolean' => array(
 				'rule' => array('boolean'),
@@ -76,6 +66,14 @@ class Post extends AppModel {
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),
 				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+			'isUnique' => array(
+				'rule' => array('isUnique'),
+				'message' => 'Slug already in use.',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
@@ -117,7 +115,7 @@ class Post extends AppModel {
 		'Comment' => array(
 			'className' => 'Comment',
 			'foreignKey' => 'post_id',
-			'dependent' => true,
+			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
@@ -129,4 +127,14 @@ class Post extends AppModel {
 		)
 	);
 
+/**
+ * Behaviors that the Model uses.
+ * 
+ * @var array
+ */
+	public $actsAs = array(
+		// Remove dangerous tags from saved project descriptions.
+		'Purify' => array('field' => 'content'),
+		'BelongsToUser'
+	);
 }

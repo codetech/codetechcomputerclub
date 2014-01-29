@@ -197,11 +197,4 @@ class Project extends AppModel {
 		'Purify' => array('field' => 'content'),
 		'BelongsToUser'
 	);
-	
-	public function beforeSave($options = array()) {
-		// Strip out non-whitelisted data from HTML.
-		$this->data['Project']['content'] = (new HTMLPurifier())->purify($this->data['Project']['content']);
-		return true;
-	}
-
 }

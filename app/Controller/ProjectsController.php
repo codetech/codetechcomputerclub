@@ -16,12 +16,25 @@ class ProjectsController extends AppController {
 	public $components = array('Paginator');
 
 /**
+ * Pagination options
+ *
+ * @var array
+ */
+	public $paginate = array(
+        'limit' => 6,
+        'order' => array(
+            'Project.created' => 'desc'
+        )
+    );
+
+/**
  * index method
  *
  * @return void
  */
 	public function index() {
 		$this->Project->recursive = 0;
+		$this->Paginator->settings = $this->paginate;
 		$this->set('projects', $this->Paginator->paginate());
 	}
 
@@ -39,6 +52,9 @@ class ProjectsController extends AppController {
 		$options = array('conditions' => array('Project.' . $this->Project->primaryKey => $id));
 		$project = $this->Project->find('first', $options);
 		$this->set('project', $project);
+		
+		$loggedInUser = $this->Auth->user();
+		$this->set('isOwner', isset($loggedInUser) && $this->Project->isOwnedBy($id, $loggedInUser['id']));
 		
 		// Filter the users array into a regularly-indexed one.
 		// NOTE: CakePHP automatically generates arrays that have a bunch of
@@ -67,7 +83,7 @@ class ProjectsController extends AppController {
 			$this->Project->create();
 			if ($this->Project->save($this->request->data)) {
 				$this->Session->setFlash(__('The project has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'view', $this->Project->id));
 			} else {
 				$this->Session->setFlash(__('The project could not be saved. Please, try again.'));
 			}
@@ -91,7 +107,7 @@ class ProjectsController extends AppController {
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Project->save($this->request->data)) {
 				$this->Session->setFlash(__('The project has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'view', $this->Project->id));
 			} else {
 				$this->Session->setFlash(__('The project could not be saved. Please, try again.'));
 			}
@@ -143,12 +159,12 @@ class ProjectsController extends AppController {
  */
 	public function isAuthorized($user) {
 		
-		// All registered users can add projects
+		// All registered users can add projects.
 		if ($this->action === 'add') {
 			return true;
 		}
 
-		// The owner of a project can edit and delete it
+		// The owner of a project can edit and delete it.
 		if (in_array($this->action, array('edit', 'delete'))) {
 			$projectId = $this->request->params['pass'][0];
 			if ($this->Project->isOwnedBy($projectId, $user['id'])) {
@@ -156,7 +172,7 @@ class ProjectsController extends AppController {
 			}
 		}
 		
-		// Refer back to the parent authorization function if these checks fail
+		// Refer back to the parent authorization function if these checks fail.
 		return parent::isAuthorized($user);
 	}
 }

@@ -1,7 +1,11 @@
 <?php $this->extend('/Common/two_column_with_sidebar'); ?>
 
 <section>
-	<h2><?php echo __('Members'); ?></h2>
+	<header>
+		<h2>Members</h2>
+		<h3>All the awesome people who make this club as great as it is.</h3>
+	</header>
+	
 	<table class="bordered-table">
 		<tr>
 			<th>Avatar</th>
@@ -38,7 +42,9 @@
 			</tr>
 		<?php endforeach; ?>
 	</table>
-	
+</section>
+
+<section>
 	<div class="paging">
 		<?php
 			echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));

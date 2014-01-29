@@ -1,12 +1,14 @@
 <?php $this->extend('/Common/two_column_with_sidebar'); ?>
 
+<?php echo $this->element('highlightjs'); ?>
+
 <section>
 	<h2><?php echo h($project['Project']['title']); ?></h2>
 	<h3><?php echo h($project['Project']['excerpt']); ?></h3>
 	<table class="bordered-table">
 		<tr>
 			<th>Start Date</th>
-			<th>Last Modified</th>
+			<th>Last Updated</th>
 			<th>Creator</th>
 			<th>Status</th>
 		</tr>
@@ -39,6 +41,17 @@
 	</div>
 </section>
 
+<?php if (!empty($project['Post'])): ?>
+	<section>
+		<h2>Related Resources</h2>
+		<ul>
+			<?php foreach ($project['Post'] as $post): ?>
+				<li><?php echo $this->Html->link($post['title'], array('controller' => 'posts', 'action' => 'view', $post['id'])); ?></li>
+			<?php endforeach; ?>
+		</ul>
+	</section>
+<?php endif; ?>
+
 <section>
 	<?php echo $this->element('comments', array(
 		'comments' => $project['Comment'],
@@ -47,21 +60,7 @@
 	)); ?>
 </section>
 
-<section>
-	<h2>Related Resources</h2>
-	<?php if (empty($project['Post'])): ?>
-		<p>No related resources.</p>
-	<?php else: ?>
-		<ul>
-			<?php foreach ($project['Post'] as $post): ?>
-				<li><?php echo $this->Html->link($post['title'], array('controller' => 'posts', 'action' => 'view', $post['id'])); ?></li>
-			<?php endforeach; ?>
-		</ul>
-	<?php endif; ?>
-</section>
-
-<?php // Should be if he owns the project or if he's the admin. ?>
-<?php if ($isAdmin): ?>
+<?php if ($isOwner || $isAdmin): ?>
 	<section>
 		<h2>Actions</h2>
 		<ul>
