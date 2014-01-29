@@ -4,6 +4,7 @@
 	<h2><?php echo __('Members'); ?></h2>
 	<table class="bordered-table">
 		<tr>
+			<th>Avatar</th>
 			<th><?php echo $this->Paginator->sort('name'); ?></th>
 			<th><?php echo $this->Paginator->sort('position'); ?></th>
 			<?php if ($isAdmin): ?>
@@ -16,6 +17,9 @@
 		</tr>
 		<?php foreach ($users as $user): ?>
 			<tr>
+				<td><?php echo $this->Html->image(h($this->Gravatar->getUrl($user['User']['email'])) . '&s=48', array(
+					'alt' => $user['User']['name'] . '\'s avatar'
+				)); ?><br></td>
 				<td><?php echo h($user['User']['name']); ?></td>
 				<td><?php echo h($user['User']['position']); ?></td>
 				<?php if ($isAdmin): ?>

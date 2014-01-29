@@ -5,7 +5,7 @@
 <section>
 	<h2><?php echo __('Member Profile'); ?>: <?php echo h($user['User']['name']); ?></h2>
 	
-	<?php echo $this->Html->image(h($gravatarUrl), array(
+	<?php echo $this->Html->image(h($this->Gravatar->getUrl($user['User']['email'])) . '&s=200', array(
 		'alt' => $user['User']['name'] . '\'s avatar'
 	)); ?><br>
 	

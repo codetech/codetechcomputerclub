@@ -71,8 +71,8 @@
 					<nav id="nav">
 						<a href="/about">About</a>
 						<a href="/join">Join</a>
-						<a href="/members">Members</a>
 						<a href="/calendar">Calendar</a>
+						<a href="/members">Members</a>
 						<a href="/projects">Projects</a>
 						<a href="/resources">Resources</a>
 					</nav>

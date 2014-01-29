@@ -16,6 +16,13 @@ class UsersController extends AppController {
 	public $components = array('Paginator', 'Picturesque');
 
 /**
+ * Helpers
+ *
+ * @var array
+ */
+	public $helpers = array('Gravatar');
+
+/**
  * beforeFilter method
  *
  * @return void
@@ -79,7 +86,6 @@ class UsersController extends AppController {
 		$this->set(array(
 			'user' => $user,
 			'isSameUser' => ($loggedInUser['id'] === $id),
-			'gravatarUrl' => $this->Picturesque->getGravatarUrl($user['User']['email']),
 		));
 		
 		// Create images of user data to protect it from scrapers.

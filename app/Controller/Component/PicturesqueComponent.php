@@ -70,13 +70,4 @@ class PicturesqueComponent extends Component {
 		
 		return $returnPath;
 	}
-
-/**
- * Generates a hashed gravatar url given an email.
- */
-	public function getGravatarUrl($email) {
-		$hash = md5( strtolower( trim( $email ) ) );
-		$url = 'http://www.gravatar.com/avatar/' . $hash . '?s=200&d=wavatar';
-		return $url;
-	}
 }
