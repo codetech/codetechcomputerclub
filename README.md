@@ -13,16 +13,42 @@ codeTech's website serves a few purposes:
 Live Website
 ------------
 
-[www.codetechcomputerclub.com](http://www.codetechcomputerclub.com)
+[codetechcomputerclub.com](http://codetechcomputerclub.com)
 
 
 Details
 -------
 
-Uses:
+Uses to following:
 
 * An [HTML5 UP](http://html5up.net) template.
 * [CakePHP](https://www.cakephp.org).
+
+
+Installation
+------------
+
+The website has dependencies that need to be installed with [Composer](https://getcomposer.org/).
+
+### Linux / Mac:
+
+```bash
+$ git clone https://github.com/codetech/codetechcomputerclub.git
+$ cd codetechcomputerclub
+$ php bin/composer.phar install
+```
+
+### Windows:
+
+1. [Install PHP](http://windows.php.net/download/) if you haven't already.
+2. Download and extract [the archive](https://github.com/codetech/codetechcomputerclub/archive/master.zip).
+3. Open a command prompt and navigate to the `codetechcomputerclub` folder.
+4. Issue the following commands:
+
+```bat
+> for /f %i in ('where php.exe') do set PHP=%i
+> %PHP% bin\composer.phar install
+```
 
 
 Contact

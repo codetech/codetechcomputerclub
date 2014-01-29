@@ -13,20 +13,28 @@ class PicturesqueComponent extends Component {
  * @params array $options Options for the image.
  * @return string Path to file.
  */
-	public function createText($text, $filename, $options = array()) {
+	public function createText($text, $filename, $folder, $options = array()) {
 		
-		// Handle options.
-		$override = empty($options['override']) ? false : $options['override'];
-		$publicPath = 'tmp/' . $filename;
-		$path = WWW_ROOT . 'img/' . $publicPath;
-		
-		if (!$override && file_exists($path)) {
-			return $publicPath;
+		// Create a directory for the image, if it doesn't exist already.
+		$folderToMake = WWW_ROOT . 'img' . DS . $folder;
+		if (!file_exists($folderToMake)) {
+			mkdir(WWW_ROOT . 'img' . DS . $folder);
 		}
 		
-		$fontFace = WWW_ROOT . 'fonts/';
+		// Prepare the paths for image.
+		$returnPath = $folder . DS . $filename;
+		$path = WWW_ROOT . 'img' . DS . $returnPath;
+		
+		// Check to see if an existing image would be overridden. If so, bail.
+		$overwrite = empty($options['overwrite']) ? false : $options['overwrite'];
+		if (!$overwrite && file_exists($path)) {
+			return $returnPath;
+		}
+		
+		// Handle options.
+		$fontFace = WWW_ROOT . 'fonts' . DS;
 		if (empty($options['fontFace'])) {
-			$fontFace .= 'dejavusans/dejavusans.ttf';
+			$fontFace .= 'dejavusans' . DS . 'dejavusans.ttf';
 		} else {
 			$fontFace .= $options['fontFace'];
 		}
@@ -60,7 +68,7 @@ class PicturesqueComponent extends Component {
 		imagepng($img, $path);
 		imagedestroy($img);
 		
-		return $publicPath;
+		return $returnPath;
 	}
 
 /**

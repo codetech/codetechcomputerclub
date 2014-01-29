@@ -46,13 +46,16 @@ class UsersController extends AppController {
 		$this->set(array(
 			'user' => $user,
 			'gravatarUrl' => $this->Picturesque->getGravatarUrl($user['User']['email']),
-			
-			// Create an image of the user's email (to protect it from scrapers).
-			'emailImagePath' => $this->Picturesque->createText(
+		));
+		
+		// Create images of user data to protect it from scrapers.
+		if (!empty($user['User']['email'])) {
+			$this->set('emailImagePath', $this->Picturesque->createText(
 				$user['User']['email'],
-				$user['User']['id'] . '-email.png',
+				'email.png',
+				'users' . DS . $user['User']['id'],
 				array(
-					'override' => true,
+					//'overwrite' => true, // Uncomment for testing.
 					'fontFace' => 'dejavusansmono/dejavusansmono-webfont.ttf',
 					'fontSize' => 11,
 					'rgb' => array(71, 79, 81),
@@ -61,14 +64,16 @@ class UsersController extends AppController {
 					'x' => 3,
 					'y' => 15
 				)
-			),
-			
-			// Create an image of the user's phone number.
-			'phoneImagePath' => $this->Picturesque->createText(
+			));
+		}
+		
+		if (!empty($user['User']['phone'])) {
+			$this->set('phoneImagePath', $this->Picturesque->createText(
 				$user['User']['phone'],
-				$user['User']['id'] . '-phone.png',
+				'phone.png',
+				'users' . DS . $user['User']['id'],
 				array(
-					//'override' => true, // Uncomment for testing.
+					//'overwrite' => true, // Uncomment for testing.
 					'fontFace' => 'dejavusansmono/dejavusansmono-webfont.ttf',
 					'fontSize' => 11,
 					'rgb' => array(71, 79, 81),
@@ -77,14 +82,15 @@ class UsersController extends AppController {
 					'x' => 3,
 					'y' => 15
 				)
-			)
-		));
+			));
+		}
 		
 		// If the user is associated with any projects, create lists of
 		// the ones he has started and those which he is associated with.
 		if (!empty($user['Project'])) {
 			
-			// Filter-out all duplicate projects.
+			// Filter-out all duplicate projects (if the user owns any
+			// projects, those are listed twice).
 			$projects = array_filter($user['Project'], function ($item) {
 				static $usedIds = array();
 				if (!in_array($item['id'], $usedIds)) {

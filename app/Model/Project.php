@@ -186,6 +186,15 @@ class Project extends AppModel {
 			'finderQuery' => '',
 		)
 	);
+
+/**
+ * Behaviors that the Model uses.
+ * 
+ * @var array
+ */
+	// Use HTML Purifier to remove dangerous tags from saved
+	// project descriptions.
+	public $actsAs = array('Purify' => array('field' => 'content'));
 	
 	public function isOwnedBy($projectId, $userId) {
 		return $this->field('id', array('id' => $projectId, 'user_id' => $userId)) === $projectId;

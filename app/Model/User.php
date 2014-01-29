@@ -131,12 +131,37 @@ class User extends AppModel {
 	);
 
 /**
- * Ensure users' profiles are purified and their passwords are hashed.
+ * Behaviors that the Model uses.
+ * 
+ * @var array
+ */
+	// Use HTML Purifier to remove dangerous tags from saved profiles.
+	public $actsAs = array('Purify' => array('field' => 'profile'));
+	
+/**
+ * Perform certain tasks before a User is saved.
+ * 
+ * @return boolean
  */
 	public function beforeSave($options = array()) {
 		
-		// Strip out non-whitelisted data from HTML.
-		$this->data['User']['profile'] = (new HTMLPurifier())->purify($this->data['User']['profile']);
+		$id = $this->data[$this->alias][$this->primaryKey];
+		$imageDir = WWW_ROOT . 'img' . DS . 'users' . DS . $id . DS;
+		
+		// If any data changed that has images generated for it, delete the
+		// outdated images so that new ones will be generated.
+		if (isset($this->data[$this->alias]['email'])) {
+			$emailImage = $imageDir . 'email.png';
+			if (file_exists($emailImage)) {
+				unlink($emailImage);
+			}
+		}
+		if (isset($this->data[$this->alias]['phone'])) {
+			$phoneImage = $imageDir . 'phone.png';
+			if (file_exists($phoneImage)) {
+				unlink($phoneImage);
+			}
+		}
 		
 		// Hash password.
 		if (isset($this->data[$this->alias]['password'])) {
