@@ -21,11 +21,13 @@ $ds = DIRECTORY_SEPARATOR;
 $dispatcher = 'Cake' . $ds . 'Console' . $ds . 'ShellDispatcher.php';
 
 if (function_exists('ini_set')) {
-	$root = dirname(dirname(dirname(__FILE__)));
+	// Updated to work with the composer install.
+	$root = dirname(dirname(dirname(__FILE__))) . $ds . 'vendors' . $ds . 'pear-pear.cakephp.org' . $ds . 'CakePHP';
 
 	// the following line differs from its sibling
 	// /lib/Cake/Console/Templates/skel/Console/cake.php
-	ini_set('include_path', $root . $ds . 'lib' . PATH_SEPARATOR . ini_get('include_path'));
+	// Updated to work with the composer install.
+	ini_set('include_path', $root . PATH_SEPARATOR . ini_get('include_path'));
 }
 
 if (!include $dispatcher) {
