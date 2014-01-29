@@ -16,13 +16,18 @@
 	<ul>
 		<?php foreach ($comments as $comment): ?>
 			<li>
-				<em><?php if (!empty($comment['author'])): ?>
-					<b><?php echo h($comment['author']); ?></b> 
-				<?php else: ?>
-					<b>Anonymous</b> 
-				<?php endif; ?>
-				(<?php echo $this->Time->format('M j, Y', $comment['created']); ?>):</em> 
-				<?php echo h($comment['content']); ?>
+				<span title="<?php echo $this->Time->format('F jS, Y h:i A', $comment['created']); ?>">
+					<b>
+						<?php if (!empty($comment['user_id'])): ?>
+							<?php echo $this->Html->link(h($comment['author']), array('controller' => 'users', 'action' => 'view', $comment['user_id'])); ?>:
+						<?php elseif (!empty($comment['author'])): ?>
+							<i><?php echo h($comment['author']); ?>:</i>
+						<?php else: ?>
+							<i>Anonymous:</i>
+						<?php endif; ?>
+					</b>
+					<?php echo h($comment['content']); ?>
+				</span>
 				<?php if ($isAdmin): ?>
 					(<?php echo $this->Html->link(__('Edit'), array('controller' => 'comments', 'action' => 'edit', $comment['id'])); ?> | 
 					<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'comments', 'action' => 'delete', $comment['id']), null, __('Are you sure you want to delete # %s?', $comment['id'])); ?>)
@@ -39,15 +44,19 @@
 			echo $this->Form->hidden($foreignKey, array(
 				'value' => $foreignKeyValue
 			));
-			$authorOptions = array(
-				'placeholder' => 'Anonymous',
-				'label' => 'Name',
-				'type' => 'text'
-			);
-			if ($loggedIn) {
-				$authorOptions['value'] = $this->Session->read('Auth.User.name');
-			}
-			echo $this->Form->input('author', $authorOptions);
+		?>
+		<?php if ($loggedIn): ?>
+			<div class="input text">
+				<label>Name</label>
+				<?php echo $this->Session->read('Auth.User.name'); ?>
+			</div>
+		<?php else:
+				echo $this->Form->input('author', array(
+					'placeholder' => 'Anonymous',
+					'label' => 'Name',
+					'type' => 'text'
+				));
+			endif;
 			echo $this->Form->input('content', array(
 				'label' => 'Comment *',
 				'type' => 'textarea'

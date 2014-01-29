@@ -192,13 +192,11 @@ class Project extends AppModel {
  * 
  * @var array
  */
-	// Use HTML Purifier to remove dangerous tags from saved
-	// project descriptions.
-	public $actsAs = array('Purify' => array('field' => 'content'));
-	
-	public function isOwnedBy($projectId, $userId) {
-		return $this->field('id', array('id' => $projectId, 'user_id' => $userId)) === $projectId;
-	}
+	public $actsAs = array(
+		// Remove dangerous tags from saved project descriptions.
+		'Purify' => array('field' => 'content'),
+		'BelongsToUser'
+	);
 	
 	public function beforeSave($options = array()) {
 		// Strip out non-whitelisted data from HTML.

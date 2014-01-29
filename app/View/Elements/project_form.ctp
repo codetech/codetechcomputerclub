@@ -19,7 +19,11 @@
 			));
 			echo $this->Form->input('content', array(
 				'type' => 'textarea',
-				'class' => 'tinymce'
+				'class' => 'tinymce',
+				// tinymce doesn't actually fill out the form until you submit,
+				// but on some browsers you can't submit until all required
+				// values have content. Catch-22. So this has to be false.
+				'required' => false
 			));
 			echo $this->Form->input('started', array(
 				'type' => 'date'

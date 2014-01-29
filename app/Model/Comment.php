@@ -135,4 +135,12 @@ class Comment extends AppModel {
 		)
 	);
 
+/**
+ * Behaviors that the Model uses.
+ * 
+ * @var array
+ */
+	public $actsAs = array(
+		'BelongsToUser'
+	);
 }

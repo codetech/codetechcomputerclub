@@ -20,10 +20,10 @@ class CommentsController extends AppController {
  *
  * @return void
  */
-	public function index() {
+	/*public function index() {
 		$this->Comment->recursive = 0;
 		$this->set('comments', $this->Paginator->paginate());
-	}
+	}*/
 
 /**
  * view method
@@ -32,13 +32,13 @@ class CommentsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
+	/*public function view($id = null) {
 		if (!$this->Comment->exists($id)) {
 			throw new NotFoundException(__('Invalid comment'));
 		}
 		$options = array('conditions' => array('Comment.' . $this->Comment->primaryKey => $id));
 		$this->set('comment', $this->Comment->find('first', $options));
-	}
+	}*/
 
 /**
  * add method
@@ -48,9 +48,19 @@ class CommentsController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Comment->create();
+			// Inject client info.
+			$this->request
+				->data('Comment.ip', $this->request->clientIp(false))
+				->data('Comment.agent', env('HTTP_USER_AGENT'));
+			$user = $this->Auth->user();
+			if (isset($user)) {
+				// Inject User info.
+				$this->request->data('Comment.user_id', $user['id']);
+				$this->request->data('Comment.author', $user['name']);
+			}
 			if ($this->Comment->save($this->request->data)) {
 				$this->Session->setFlash(__('The comment has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect($this->referer());
 			} else {
 				$this->Session->setFlash(__('The comment could not be saved. Please, try again.'));
 			}
@@ -110,5 +120,35 @@ class CommentsController extends AppController {
 			$this->Session->setFlash(__('The comment could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+/**
+ * beforeFilter method
+ *
+ * @return void
+ */
+	public function beforeFilter() {
+		parent::beforeFilter();
+		// Allow guests and users to add comments.
+		$this->Auth->allow('add');
+	}
+
+/**
+ * isAuthorized method
+ *
+ * @return boolean
+ */
+	public function isAuthorized($user) {
+
+		// The owner of a comment can edit and delete it.
+		if (in_array($this->action, array('edit', 'delete'))) {
+			$id = $this->request->params['pass'][0];
+			if ($this->Comment->isOwnedBy($id, $user['id'])) {
+				return true;
+			}
+		}
+		
+		// Refer back to the parent authorization function if these checks fail
+		return parent::isAuthorized($user);
 	}
 }
