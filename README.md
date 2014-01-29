@@ -24,7 +24,7 @@ The website has dependencies that need to be installed with [Composer](https://g
 
 ### Linux / Mac:
 
-1. Have git and php installed. (Debian: `sudo apt-get git php5`; Mac (using [Homebrew](http://brew.sh/)): `brew install git php5`.)
+1. Have git and php installed. `sudo apt-get install git php5`, or (on Mac using [Homebrew](http://brew.sh/)) `brew install git php5`.
 
 ```bash
 $ git clone https://github.com/codetech/codetechcomputerclub.git
@@ -35,8 +35,8 @@ $ php bin/composer.phar install
 ### Windows:
 
 1. [Install PHP](http://windows.php.net/download/) if you haven't already.
-2. Download and extract [the archive](https://github.com/codetech/codetechcomputerclub/archive/master.zip).
-3. Open a command prompt and navigate to the `codetechcomputerclub` folder.
+2. Download and extract [the website's archive](https://github.com/codetech/codetechcomputerclub/archive/master.zip).
+3. Open a command prompt and navigate to the `codetechcomputerclub` folder you just extracted.
 4. Issue the following command, but replace `c:\php\php.exe` with **your** path to `php.exe`. (Figure out where it is.)
 
 ```bat
