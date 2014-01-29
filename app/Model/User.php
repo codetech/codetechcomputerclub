@@ -58,6 +58,12 @@ class User extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+		'current_password' => array(
+			'checkCurrentPassword' => array(
+				'rule' => array('checkCurrentPassword'),
+				'message' => 'Incorrect password.'
+			),
+		),
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -170,5 +176,19 @@ class User extends AppModel {
 		}
 		
 		return true;
+	}
+
+/**
+ * Used for validating a password (while the user is already logged in).
+ * Some sensitive tasks require passwords to be re-entered, so this checks
+ * the user's password on-record against the password he claims is his
+ * current one (`current_password`).
+ * 
+ * @return boolean
+ */
+	public function checkCurrentPassword() {
+		$passwordHasher = new SimplePasswordHasher();
+		$user = $this->findById($this->data['User']['id']);
+		return ($passwordHasher->hash($this->data['User']['current_password']) === $user['User']['password']);
 	}
 }

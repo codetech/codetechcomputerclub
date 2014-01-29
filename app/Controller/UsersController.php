@@ -16,6 +16,36 @@ class UsersController extends AppController {
 	public $components = array('Paginator', 'Picturesque');
 
 /**
+ * beforeFilter method
+ *
+ * @return void
+ */
+	public function beforeFilter() {
+		parent::beforeFilter();
+		// Allow guests to visit the following pages:
+		$this->Auth->allow('index', 'view', 'add', 'logout');
+	}
+
+/**
+ * isAuthorized method
+ *
+ * @return boolean
+ */
+	public function isAuthorized($user) {
+
+		// Only the user himself can edit himself.
+		if (in_array($this->action, array('edit', 'change_password'))) {
+			$userId = $this->request->params['pass'][0];
+			if ($userId === $user['id']) {
+				return true;
+			}
+		}
+		
+		// Refer back to the parent authorization function if these checks fail
+		return parent::isAuthorized($user);
+	}
+
+/**
  * index method
  *
  * @return void
@@ -40,11 +70,15 @@ class UsersController extends AppController {
 		if (!$this->User->exists($id)) {
 			throw new NotFoundException(__('Invalid user'));
 		}
+		
 		$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
 		$user = $this->User->find('first', $options);
 		
+		$loggedInUser = $this->Auth->user();
+		
 		$this->set(array(
 			'user' => $user,
+			'isSameUser' => ($loggedInUser['id'] === $id),
 			'gravatarUrl' => $this->Picturesque->getGravatarUrl($user['User']['email']),
 		));
 		
@@ -120,8 +154,10 @@ class UsersController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->User->create();
-			$this->request->data['User']['position'] = 'Member';
-			$this->request->data['User']['admin'] = 0;
+			// Inject some values.
+			$this->request
+				->data('User.position', 'Member')
+				->data('User.admin', 0);
 			if ($this->User->save($this->request->data)) {
 				$this->Session->setFlash(__('The user has been saved.'));
 				return $this->redirect(array('action' => 'add'));
@@ -177,36 +213,6 @@ class UsersController extends AppController {
 	}
 
 /**
- * beforeFilter method
- *
- * @return void
- */
-	public function beforeFilter() {
-		parent::beforeFilter();
-		// Allow guests to visit the following pages:
-		$this->Auth->allow('index', 'view', 'add', 'logout');
-	}
-
-/**
- * isAuthorized method
- *
- * @return boolean
- */
-	public function isAuthorized($user) {
-
-		// Only the user himself can edit himself.
-		if (in_array($this->action, array('edit'))) {
-			$userId = $this->request->params['pass'][0];
-			if ($userId === $user['id']) {
-				return true;
-			}
-		}
-		
-		// Refer back to the parent authorization function if these checks fail
-		return parent::isAuthorized($user);
-	}
-
-/**
  * login method
  *
  * @return void
@@ -229,5 +235,26 @@ class UsersController extends AppController {
 	public function logout() {
 		$this->Session->setFlash(__('Logged out.'));
 		return $this->redirect($this->Auth->logout());
+	}
+	
+/**
+ * Change password page.
+ *
+ * @return void
+ */
+	public function change_password($id = null) {
+		if (!$this->User->exists($id)) {
+			throw new NotFoundException(__('Invalid user'));
+		}
+		if (!empty($this->data)) {
+			if ($this->User->save($this->data)) {
+				$this->Session->setFlash('Password has been changed.');
+				return $this->redirect($this->Auth->redirectUrl());
+			} else {
+				$this->Session->setFlash('Password could not be changed.');
+			}
+		} else {
+			$this->data = $this->User->findById($this->Auth->user('id'));
+		}
 	}
 }

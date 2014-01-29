@@ -14,9 +14,6 @@
 			echo $this->Form->input('email', array(
 				'type' => 'email'
 			));
-			echo $this->Form->input('password', array(
-				'type' => 'password'
-			));
 			echo $this->Form->input('studentid', array(
 				'label' => 'MCC Student ID',
 				'type' => 'text'
@@ -39,6 +36,7 @@
 	<section>
 		<h3>Actions</h3>
 		<ul>
+			<li><?php echo $this->Html->link(__('Change Password'), array('action' => 'change_password', $user['User']['id'])); ?></li>
 			<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('User.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('User.id'))); ?></li>
 		</ul>
 	</section>

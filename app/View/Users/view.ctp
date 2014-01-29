@@ -53,12 +53,12 @@
 	<?php endif; ?>
 </section>
 
-<?php // Should be if he is looking at himself or if he's the admin. ?>
-<?php if ($isAdmin): ?>
+<?php if ($isSameUser || $isAdmin): ?>
 	<section>
 		<h2>Actions</h2>
 		<ul>
 			<li><?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $user['User']['id'])); ?></li>
+			<li><?php echo $this->Html->link(__('Change Password'), array('action' => 'change_password', $user['User']['id'])); ?></li>
 			<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $user['User']['id']), null, __('Are you sure you want to delete # %s?', $user['User']['id'])); ?></li>
 		</ul>
 	</section>
