@@ -5,7 +5,7 @@
 <section>
 	<h2><?php echo h($project['Project']['title']); ?></h2>
 	<h3><?php echo h($project['Project']['excerpt']); ?></h3>
-	<table class="bordered-table">
+	<table class="bordered-table wide">
 		<tr>
 			<th>Start Date</th>
 			<th>Last Updated</th>

@@ -6,7 +6,7 @@
 		<h3>All the awesome people who make this club as great as it is.</h3>
 	</header>
 	
-	<table class="bordered-table">
+	<table class="bordered-table breaking wide">
 		<tr>
 			<th>Avatar</th>
 			<th><?php echo $this->Paginator->sort('name'); ?></th>
@@ -16,6 +16,8 @@
 				<th><?php echo $this->Paginator->sort('phone'); ?></th>
 				<th><?php echo $this->Paginator->sort('id'); ?></th>
 				<th><?php echo $this->Paginator->sort('studentid'); ?></th>
+				<th><?php echo $this->Paginator->sort('receiveemail'); ?></th>
+				<th><?php echo $this->Paginator->sort('receivesms'); ?></th>
 			<?php endif; ?>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 		</tr>
@@ -31,6 +33,8 @@
 					<td><?php echo h($user['User']['phone']); ?></td>
 					<td><?php echo h($user['User']['id']); ?></td>
 					<td><?php echo h($user['User']['studentid']); ?></td>
+					<td><?php echo h($user['User']['receiveemail']); ?></td>
+					<td><?php echo h($user['User']['receivesms']); ?></td>
 				<?php endif; ?>
 				<td>
 					<?php echo $this->Html->link(__('View'), array('action' => 'view', $user['User']['id'])); ?>
@@ -42,9 +46,7 @@
 			</tr>
 		<?php endforeach; ?>
 	</table>
-</section>
-
-<section>
+	
 	<div class="paging">
 		<?php
 			echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));

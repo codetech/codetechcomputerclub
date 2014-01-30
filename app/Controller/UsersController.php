@@ -1,5 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
+App::uses('CakeEmail', 'Network/Email');
 /**
  * Users Controller
  *
@@ -21,6 +22,18 @@ class UsersController extends AppController {
  * @var array
  */
 	public $helpers = array('Gravatar');
+
+/**
+ * Pagination options
+ *
+ * @var array
+ */
+	public $paginate = array(
+        'limit' => 10,
+        'order' => array(
+            'User.created' => 'desc'
+        )
+    );
 
 /**
  * beforeFilter method
@@ -48,7 +61,7 @@ class UsersController extends AppController {
 			}
 		}
 		
-		// Refer back to the parent authorization function if these checks fail
+		// Refer back to the parent authorization function if these checks fail.
 		return parent::isAuthorized($user);
 	}
 
@@ -59,7 +72,7 @@ class UsersController extends AppController {
  */
 	public function index() {
 		$this->User->recursive = 0;
-		//$this->Paginator->settings = $this->paginate;
+		$this->Paginator->settings = $this->paginate;
 		$this->set('users', $this->Paginator->paginate());
 	}
 
@@ -172,6 +185,8 @@ class UsersController extends AppController {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
 			}
 		}
+		$gateways = $this->User->Gateway->find('list');
+		$this->set('gateways', $gateways);
 	}
 
 /**
@@ -196,6 +211,8 @@ class UsersController extends AppController {
 			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
 			$this->request->data = $this->User->find('first', $options);
 		}
+		$gateways = $this->User->Gateway->find('list');
+		$this->set('gateways', $gateways);
 	}
 
 /**
@@ -262,6 +279,91 @@ class UsersController extends AppController {
 			}
 		} else {
 			$this->data = $this->User->findById($this->Auth->user('id'));
+		}
+	}
+
+/**
+ * Send email page.
+ * 
+ * Only accessible by admins.
+ * 
+ * @return void
+ */
+	public function send_email() {
+		if ($this->request->is('post')) {
+			
+			// Grab all email addressed which have opted to receive emails.
+			$emails = $this->User->find('list', array(
+				'conditions' => array('User.receiveemail' => true),
+				'fields' => array('User.email')
+			));
+			
+			// Split the emails list so that there will be one "to" address
+			// and the rest will be bccs.
+			$firstEmail = array_shift($emails);
+			$Email = new CakeEmail();
+			$Email->config('gmail')
+				->template('default', null)
+				->emailFormat('both')
+				->to($firstEmail)
+				->bcc($emails)
+				->subject($this->request->data['Email']['title'])
+				->viewVars(array(
+					'textContent' => $this->request->data['Email']['text_message'],
+					'htmlContent' => $this->request->data['Email']['html_message'],
+				))
+				->send();
+			
+			$this->Session->setFlash('The email has been sent.');
+			return $this->redirect(array('action' => 'index'));
+		}
+	}
+	
+	public function send_text() {
+		if ($this->request->is('post')) {
+			
+			// Select only relevant phone and address information.
+			$numbers = $this->User->find('all', array(
+				'conditions' => array(
+					'User.receivesms' => true,
+					'User.phone !=' => ''
+				),
+				'fields' => array('User.phone'),
+				'contain' => array('Gateway.address'),
+			));
+			
+			// Generate SMS email addresses.
+			// To prevent abuse, only send up to 5 texts for each User.
+			// Counting the texts probably isn't necessary now that limits
+			// are imposed at the Model level. Remove that check when things
+			// feel safe.
+			$emails = array();
+			foreach ($numbers as $number) {
+				$pureNumber = preg_replace('/[^0-9]/', '', $number['User']['phone']);
+				$textsGenerated = 0;
+				foreach ($number['Gateway'] as $gateway) {
+					if ($textsGenerated === 5) break;
+					array_push($emails, $pureNumber . '@' . $gateway['address']);
+					$textsGenerated++;
+				}
+			}
+			
+			// Split the emails list so that there will be one "to" address
+			// and the rest will be bccs.
+			$firstEmail = array_shift($emails);
+			$Email = new CakeEmail();
+			$Email->config('gmail')
+				->template('default', null)
+				->emailFormat('text')
+				->to($firstEmail)
+				->bcc($emails)
+				->viewVars(array(
+					'textContent' => $this->request->data['Email']['text_message'],
+				))
+				->send();
+			
+			$this->Session->setFlash('The text has been sent.');
+			return $this->redirect(array('action' => 'index'));
 		}
 	}
 }

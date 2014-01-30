@@ -20,7 +20,7 @@
 			
 			// Use correct urls for Cake.
 			relative_urls: false,
-			remove_script_host: true,
+			remove_script_host: <?php if (isset($remove_script_host) && $remove_script_host === false): ?> false <?php else: ?> true <?php endif; ?>,
 			document_base_url: "/"
 		});
 	</script>

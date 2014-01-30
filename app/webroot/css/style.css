@@ -469,6 +469,15 @@ table.bordered-table,
 	padding: 10px;
 }
 
+table.breaking th,
+table.breaking td {
+	word-break: break-all;
+}
+
+table.wide {
+	width: 100%;
+}
+
 /* Inputs */
 .input:not(.checkbox) label {
 	display: block;

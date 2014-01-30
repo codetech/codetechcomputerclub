@@ -63,3 +63,12 @@
 		</ul>
 	</section>
 <?php endif; ?>
+
+<?php if ($isAdmin): ?>
+	<section>
+		<h2>Administrative Actions</h2>
+		<ul>
+			<li><?php echo $this->Html->link('Send Email', array('action' => 'send_email')); ?></li><li><?php echo $this->Html->link('Send Text', array('action' => 'send_text')); ?></li>
+		</ul>
+	</section>
+<?php endif; ?>
