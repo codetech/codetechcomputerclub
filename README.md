@@ -27,6 +27,7 @@ The website has dependencies that need to be installed with [Composer](https://g
 1. Have git and php installed.
     - Debian: `sudo apt-get install git php5`
     - Mac (using [Homebrew](http://brew.sh/)): `brew install git`
+2. Open a terminal and issue the following commands:
 
 ```bash
 $ git clone https://github.com/codetech/codetechcomputerclub.git
