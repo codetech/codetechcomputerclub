@@ -17,7 +17,7 @@
 					<b><?php echo h($project['Project']['title']); ?></b><br>
 					<?php echo h($project['Project']['excerpt']); ?><br>
 					<i>Last Updated: <?php echo $this->Time->format('M j, Y', $project['Project']['modified']); ?></i><br>
-					<?php echo $this->Html->link(__('View'), array('action' => 'view', $project['Project']['id'])); ?> 
+					<?php echo $this->Html->link(__('View'), array('action' => 'view', $project['Project']['slug'])); ?> 
 					<?php if ($isAdmin): ?>
 						<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $project['Project']['id'])); ?>
 						<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $project['Project']['id']), null, __('Are you sure you want to delete # %s?', $project['Project']['id'])); ?>

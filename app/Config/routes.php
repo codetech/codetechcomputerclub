@@ -37,6 +37,7 @@
  */
 	Router::connect('/about', array('controller' => 'pages', 'action' => 'display', 'about'));
 	Router::connect('/calendar', array('controller' => 'pages', 'action' => 'display', 'calendar'));
+	Router::connect('/licensing', array('controller' => 'pages', 'action' => 'display', 'licensing'));
 	
 	// TODO: Remove this line, it's merely for testing new pages. All pages
 	// under PagesController should get their own dedicated routes.
@@ -50,6 +51,26 @@
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
 	Router::connect('/members', array('controller' => 'users'));
 	Router::connect('/members/:action/*', array('controller' => 'users'));
+
+/**
+ * Override default Projects' routing in order to use slugs for the view action.
+ */
+	Router::connect('/projects', array('controller' => 'projects', 'action' => 'index'));
+	Router::connect('/projects/:action/*',
+		array('controller' => 'projects'),
+		array('action' => 'index|add|edit|delete')
+	);
+	Router::connect('/projects/*', array('controller' => 'projects', 'action' => 'view'));
+	
+/**
+ * Override default Posts' routing in order to use slugs for the view action.
+ */
+	Router::connect('/posts', array('controller' => 'posts', 'action' => 'index'));
+	Router::connect('/posts/:action/*',
+		array('controller' => 'posts'),
+		array('action' => 'index|add|edit|delete')
+	);
+	Router::connect('/posts/*', array('controller' => 'posts', 'action' => 'view'));
 
 /**
  * Alias "/posts" to "/resources".

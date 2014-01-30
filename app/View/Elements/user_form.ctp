@@ -16,6 +16,10 @@
 			if ($this->action === 'edit') {
 				echo $this->Form->hidden('id');
 			}
+			if ($isAdmin) {
+				echo $this->Form->input('position');
+				echo $this->Form->input('admin');
+			}
 			echo $this->Form->input('name', array(
 				'label' => ($this->action === 'add' ? 'Full Name *' : 'Full Name')
 			));

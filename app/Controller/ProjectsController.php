@@ -45,12 +45,16 @@ class ProjectsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
-		if (!$this->Project->exists($id)) {
-			throw new NotFoundException(__('Invalid project'));
+	public function view($id = null, $options = array()) {
+		$defaults = array(
+			'conditions' => array(
+				$this->Project->alias . '.slug' => $id
+			)
+		);
+		$project = $this->Project->find('first', Set::merge($defaults, $options));
+		if (empty($project)) {
+			throw new NotFoundException('Invalid project.');
 		}
-		$options = array('conditions' => array('Project.' . $this->Project->primaryKey => $id));
-		$project = $this->Project->find('first', $options);
 		$this->set('project', $project);
 		
 		$loggedInUser = $this->Auth->user();

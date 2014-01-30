@@ -118,7 +118,7 @@
 
 	<!-- Copyright -->
 	<div id="copyright">
-		&copy; <?php echo date('Y'); ?> codeTech. All rights reserved. | Design: <a href="http://html5up.net">HTML5 UP</a> | Images: <a href="http://fotogrph.com">fotogrph</a>
+		&copy; <?php echo date('Y'); ?> codeTech. All rights reserved. | Design: <a href="http://html5up.net">HTML5 UP</a> | Images: <a href="http://fotogrph.com">fotogrph</a> | <a href="/licensing">Licensing</a>
 	</div>
 	
 	<!-- Google Analytics Widget -->

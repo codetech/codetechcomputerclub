@@ -10,7 +10,7 @@
 		<?php foreach ($posts as $post): ?>
 			<li class="link-list">
 				<?php echo $this->Time->format('M j, Y', $post['Post']['created']); ?>: <!---->
-				<?php echo $this->Html->link(h($post['Post']['title']), array('action' => 'view', $post['Post']['id'])); ?> <!---->
+				<?php echo $this->Html->link(h($post['Post']['title']), array('action' => 'view', $post['Post']['slug'])); ?> <!---->
 				<?php if ($isAdmin): ?>
 					(<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $post['Post']['id'])); ?> | <!---->
 					<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $post['Post']['id']), null, __('Are you sure you want to delete # %s?', $post['Post']['id'])); ?>)

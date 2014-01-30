@@ -45,12 +45,17 @@ class PostsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
-		if (!$this->Post->exists($id)) {
-			throw new NotFoundException(__('Invalid post'));
+	public function view($id = null, $options = array()) {
+		$defaults = array(
+			'conditions' => array(
+				$this->Post->alias . '.slug' => $id
+			)
+		);
+		$post = $this->Post->find('first', Set::merge($defaults, $options));
+		if (empty($post)) {
+			throw new NotFoundException('Invalid post.');
 		}
-		$options = array('conditions' => array('Post.' . $this->Post->primaryKey => $id));
-		$this->set('post', $this->Post->find('first', $options));
+		$this->set('post', $post);
 		
 		$loggedInUser = $this->Auth->user();
 		$this->set('isOwner', isset($loggedInUser) && $this->Post->isOwnedBy($id, $loggedInUser['id']));
