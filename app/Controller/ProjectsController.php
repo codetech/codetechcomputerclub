@@ -48,7 +48,12 @@ class ProjectsController extends AppController {
 	public function view($id = null, $options = array()) {
 		$defaults = array(
 			'conditions' => array(
-				$this->Project->alias . '.slug' => $id
+				'OR' => array(
+					// Seriously consider ditching this, it will probably just
+					// result in a duplicate content penalty.
+					$this->Project->alias . '.' . $this->Project->primaryKey => $id,
+					$this->Project->alias . '.slug' => $id
+				)
 			)
 		);
 		$project = $this->Project->find('first', Set::merge($defaults, $options));

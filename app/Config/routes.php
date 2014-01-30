@@ -49,8 +49,12 @@
 	Router::connect('/join', array('controller' => 'users', 'action' => 'add'));
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
-	Router::connect('/members', array('controller' => 'users'));
-	Router::connect('/members/:action/*', array('controller' => 'users'));
+	Router::connect('/members', array('controller' => 'users', 'action' => 'index'));
+	Router::connect('/members/:action/*',
+		array('controller' => 'users'),
+		array('action' => 'index|add|edit|delete')
+	);
+	Router::connect('/members/*', array('controller' => 'users', 'action' => 'view'));
 
 /**
  * Override default Projects' routing in order to use slugs for the view action.
@@ -63,20 +67,15 @@
 	Router::connect('/projects/*', array('controller' => 'projects', 'action' => 'view'));
 	
 /**
+ * Alias "/posts" to "/resources".
  * Override default Posts' routing in order to use slugs for the view action.
  */
-	Router::connect('/posts', array('controller' => 'posts', 'action' => 'index'));
-	Router::connect('/posts/:action/*',
+	Router::connect('/resources', array('controller' => 'posts', 'action' => 'index'));
+	Router::connect('/resources/:action/*',
 		array('controller' => 'posts'),
 		array('action' => 'index|add|edit|delete')
 	);
-	Router::connect('/posts/*', array('controller' => 'posts', 'action' => 'view'));
-
-/**
- * Alias "/posts" to "/resources".
- */
-	Router::connect('/resources', array('controller' => 'posts'));
-	Router::connect('/resources/:action/*', array('controller' => 'posts'));
+	Router::connect('/resources/*', array('controller' => 'posts', 'action' => 'view'));
 	
 /**
  * Load the CakePHP default routes. Only remove this if you do not want to use

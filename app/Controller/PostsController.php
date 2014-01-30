@@ -48,7 +48,10 @@ class PostsController extends AppController {
 	public function view($id = null, $options = array()) {
 		$defaults = array(
 			'conditions' => array(
-				$this->Post->alias . '.slug' => $id
+				'OR' => array(
+					$this->Post->alias . '.' . $this->Post->primaryKey => $id,
+					$this->Post->alias . '.slug' => $id
+				)
 			)
 		);
 		$post = $this->Post->find('first', Set::merge($defaults, $options));
