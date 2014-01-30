@@ -24,7 +24,9 @@ The website has dependencies that need to be installed with [Composer](https://g
 
 ### Linux / Mac:
 
-1. Have git and php installed. `sudo apt-get install git php5`, or (on Mac using [Homebrew](http://brew.sh/)) `brew install git php5`.
+1. Have git and php installed.
+    - Debian: `sudo apt-get install git php5`
+    - Mac (using [Homebrew](http://brew.sh/)): `brew install git`
 
 ```bash
 $ git clone https://github.com/codetech/codetechcomputerclub.git
