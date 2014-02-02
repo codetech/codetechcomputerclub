@@ -37,6 +37,7 @@
  */
 	Router::connect('/about', array('controller' => 'pages', 'action' => 'display', 'about'));
 	Router::connect('/calendar', array('controller' => 'pages', 'action' => 'display', 'calendar'));
+	Router::connect('/contact', array('controller' => 'pages', 'action' => 'display', 'contact'));
 	Router::connect('/licensing', array('controller' => 'pages', 'action' => 'display', 'licensing'));
 	
 	// TODO: Remove this line, it's merely for testing new pages. All pages
