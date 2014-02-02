@@ -74,9 +74,6 @@ class DATABASE_CONFIG {
 		//'encoding' => 'utf8',
 	);
 	
-	// `jackson` is a restricted user.
-	// He can execute the following commands only:
-	// select, insert, update, delete, create, drop
 	public $production = array(
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
