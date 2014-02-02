@@ -52,7 +52,7 @@ If the above command doesn't work, [Install Composer on your system](https://get
 composer install
 ```
 
-Finally, set up the database:
+### Set up the database:
 
 1. A database schema is located at `bin/database.sql`. Run the commands contained therein to set up the website's database.
     - In bash, you can issue the command `mysql < bin/database.sql`.
@@ -60,7 +60,7 @@ Finally, set up the database:
     - Or look up "how to execute SQL queries in MySQL".
 2. Make a copy of `app/Config/database.php.default` named `database.php`. Fill out your credentials in the `$development` array, and change the `__construct()` function if you want to use a ServerName other than `localhost` or `ctcc.local`.
 
-And finally-finally, configure Apache.
+### Configure Apache:
 
 Open up `/etc/apache2/apache2.conf`, or `httpd.conf` (wherever it may be on your system), or create a new virtual host.
 
