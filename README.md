@@ -30,9 +30,9 @@ The website has dependencies that need to be installed with [Composer](https://g
 2. Open a terminal and issue the following commands:
 
 ```bash
-$ git clone https://github.com/codetech/codetechcomputerclub.git
-$ cd codetechcomputerclub
-$ php bin/composer.phar install
+git clone https://github.com/codetech/codetechcomputerclub.git
+cd codetechcomputerclub
+php bin/composer.phar install
 ```
 
 ### Windows:
@@ -43,13 +43,13 @@ $ php bin/composer.phar install
 4. Issue the following command, but replace `c:\php\php.exe` with **your** path to `php.exe`. (Figure out where it is.)
 
 ```bat
-> c:\php\php.exe bin\composer.phar install
+c:\php\php.exe bin\composer.phar install
 ```
 
 If the above command doesn't work, [Install Composer on your system](https://getcomposer.org/Composer-Setup.exe) and then (in the `codetechcomputerclub` folder) issue the following command:
 
 ```bat
-> composer install
+composer install
 ```
 
 Finally, set up the database:
@@ -62,7 +62,7 @@ Finally, set up the database:
 
 And finally-finally, configure Apache.
 
-1. Open up `/etc/apache2/apache2.conf`, or `httpd.conf` (wherever it may be on your system), or create a new virtual host.
+Open up `/etc/apache2/apache2.conf`, or `httpd.conf` (wherever it may be on your system), or create a new virtual host.
 
 - If editing `apache2.conf` or `httpd.conf`, edit your `<Directory>` directive so that it includes the following components:
 
@@ -70,8 +70,7 @@ And finally-finally, configure Apache.
 DocumentRoot "/var/www/app/webroot"
 SetEnv CAKEPHP_DEBUG 1
 <Directory "/var/www">
-    Options Indexes FollowSymLinks ExecCGI Includes
-    AllowOverride All
+    AllowOverride all
     Order allow,deny
     Allow from all
     Require all granted
@@ -96,8 +95,7 @@ SetEnv CAKEPHP_DEBUG 1
 
 - And also, if using virtual hosts:
     - Make sure to add `ctcc.local` to the `/etc/hosts` file (Linux / Mac), or the `C:\Windows\System32\drivers\etc\hosts` file (Windows).
-    - Make sure to properly enable virtual hosts in `apache2.conf` or `httpd.conf`. (This process is different for every system, have fun Googling.)
-    - [Here's a brief guide on setting them up.](https://www.linode.com/wiki/index.php/Configure_apache_to_use_virtual_hosts_on_ubuntu_server)
+    - Make sure to properly enable virtual hosts in `apache2.conf` or `httpd.conf`. (This process is different for every system, so have fun Googling.)
 
 
 Contact
