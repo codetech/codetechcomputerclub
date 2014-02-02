@@ -26,10 +26,10 @@
 		<h2><?php echo __('Useful Resources'); ?></h2>
 	</header>
 	<ul class="bullet-list">
-		<?php $posts = $this->Sidebar->getPosts();
-		for ($i = 0, $j = count($posts); $i < $j; $i++): ?>
-			<li><?php echo $posts[$i]; ?></li>
-		<?php endfor; ?>
+		<?php foreach ($posts as $post): ?>
+		<li><?php echo $this->Html->link($post['Post']['title'],
+	            array('controller'=>'posts', 'action' => 'view', $post['Post']['id']));?></li>
+		<?php endforeach; ?>
 	</ul>
 </section>
 
