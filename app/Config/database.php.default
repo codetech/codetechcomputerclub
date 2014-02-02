@@ -61,7 +61,9 @@
  */
 class DATABASE_CONFIG {
 
-	public $default = array(
+	public $default = null;
+	
+	public $development = array(
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
 		'host' => 'localhost',
@@ -71,15 +73,38 @@ class DATABASE_CONFIG {
 		'prefix' => '',
 		//'encoding' => 'utf8',
 	);
-
-	public $test = array(
+	
+	// `jackson` is a restricted user.
+	// He can execute the following commands only:
+	// select, insert, update, delete, create, drop
+	public $production = array(
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
 		'host' => 'localhost',
 		'login' => 'user',
 		'password' => 'password',
-		'database' => 'test_database_name',
+		'database' => 'database_name',
 		'prefix' => '',
 		//'encoding' => 'utf8',
 	);
+	
+	// Switch databases depending on if in development or production.
+	function __construct() {
+		if (isset($_SERVER['SERVER_NAME'])) {
+			switch ($_SERVER['SERVER_NAME']) {
+				case 'ctcc.local':
+				case 'localhost':
+					$this->default = $this->development;
+					break;
+				case 'codetechcomputerclub.com':
+				case 'www.codetechcomputerclub.com':
+					$this->default = $this->production;
+					break;
+			}
+		}
+		// We are likely baking. Use our local db.
+		else {
+			$this->default = $this->development;
+		}
+	}
 }
