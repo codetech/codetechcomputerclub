@@ -52,9 +52,52 @@ If the above command doesn't work, [Install Composer on your system](https://get
 > composer install
 ```
 
-Finally, set up the database in MySQL.
+Finally, set up the database:
 
-(TODO: Include the database schema .sql file.)
+1. A database schema is located at `bin/database.sql`. Run the commands contained therein to set up the website's database.
+    - In bash, you can issue the command `mysql < bin/database.sql`.
+    - In phpMyAdmin, you can click the "SQL" tab at the top of any page, copy and paste the contents of `database.sql` into the "Run SQL query/queries" form, and click "Go".
+    - Or look up "how to execute SQL queries in MySQL".
+2. Make a copy of `app/Config/database.php.default` named `database.php`. Fill out your credentials in the `$development` array, and change the `__construct()` function if you want to use a ServerName other than `localhost` or `ctcc.local`.
+
+And finally-finally, configure Apache.
+
+1. Open up `/etc/apache2/apache2.conf`, or `httpd.conf` (wherever it may be on your system), or create a new virtual host.
+
+- If editing `apache2.conf` or `httpd.conf`, edit your `<Directory>` directive so that it includes the following components:
+
+```apache
+DocumentRoot "/var/www/app/webroot"
+SetEnv CAKEPHP_DEBUG 1
+<Directory "/var/www">
+    Options Indexes FollowSymLinks ExecCGI Includes
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+    Require all granted
+</Directory>
+```
+
+- If creating a virtual host:
+
+```apache
+<VirtualHost *>
+    DocumentRoot "/var/www/ctcc/app/webroot"
+    ServerName ctcc.local
+    SetEnv CAKEPHP_DEBUG 1
+    <Directory "/var/www/ctcc">
+        AllowOverride all
+        Order allow,deny
+        Allow from all
+        Require all granted
+    </Directory>
+</VirtualHost>
+```
+
+- And also, if using virtual hosts:
+    - Make sure to add `ctcc.local` to the `/etc/hosts` file (Linux / Mac), or the `C:\Windows\System32\drivers\etc\hosts` file (Windows).
+    - Make sure to properly enable virtual hosts in `apache2.conf` or `httpd.conf`. (This process is different for every system, have fun Googling.)
+    - [Here's a brief guide on setting them up.](https://www.linode.com/wiki/index.php/Configure_apache_to_use_virtual_hosts_on_ubuntu_server)
 
 
 Contact
