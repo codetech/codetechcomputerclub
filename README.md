@@ -64,7 +64,7 @@ composer install
 
 Open up `/etc/apache2/apache2.conf`, or `httpd.conf` (wherever it may be on your system), or create a new virtual host.
 
-- If editing `apache2.conf` or `httpd.conf`, edit your `<Directory>` directive so that it includes the following components:
+- If editing `apache2.conf` or `httpd.conf`, make sure the following components and the `<Directory>` directive are included. Your paths will probably differ.
 
 ```apache
 DocumentRoot "/var/www/app/webroot"
@@ -77,7 +77,7 @@ SetEnv CAKEPHP_DEBUG 1
 </Directory>
 ```
 
-- If creating a virtual host:
+- If creating a virtual host (your paths will probably differ):
 
 ```apache
 <VirtualHost *>
