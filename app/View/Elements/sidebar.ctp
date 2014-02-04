@@ -14,7 +14,7 @@
 		<h2><?php echo __('Hot Projects'); ?></h2>
 	</header>
 	<ul class="bullet-list">
-		<?php foreach ($this->Sidebar->getPosts() as $project): ?>
+		<?php foreach ($this->Sidebar->getProjects() as $project): ?>
 		<li><?php echo $this->Html->link(__($project['Project']['title']),
 	            array('controller'=>'projects', 'action' => 'view', $project['Project']['slug']));?></li>
 		<?php endforeach; ?>
