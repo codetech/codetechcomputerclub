@@ -14,10 +14,10 @@
 		<h2><?php echo __('Hot Projects'); ?></h2>
 	</header>
 	<ul class="bullet-list">
-		<?php $projects = $this->Sidebar->getProjects();
-		for ($i = 0, $j = count($projects); $i < $j; $i++): ?>
-			<li><?php echo $projects[$i]; ?></li>
-		<?php endfor; ?>
+		<?php foreach ($this->Sidebar->getPosts() as $project): ?>
+		<li><?php echo $this->Html->link(__($project['Project']['title']),
+	            array('controller'=>'projects', 'action' => 'view', $project['Project']['slug']));?></li>
+		<?php endforeach; ?>
 	</ul>
 </section>
 
@@ -26,7 +26,7 @@
 		<h2><?php echo __('Useful Resources'); ?></h2>
 	</header>
 	<ul class="bullet-list">
-		<?php foreach ($posts as $post): ?>
+		<?php foreach ($this->Sidebar->getPosts() as $post): ?>
 		<li><?php echo $this->Html->link($post['Post']['title'],
 	            array('controller'=>'posts', 'action' => 'view', $post['Post']['id']));?></li>
 		<?php endforeach; ?>

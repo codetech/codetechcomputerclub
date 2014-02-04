@@ -87,11 +87,6 @@ class AppController extends Controller {
  * @return void
  */
 	public function beforeFilter() {
-		//allows the sidebar access to the Post object
-		$this->loadModel('Post');
-		$posts = $this->Post->find('all');
-		$this->set('posts', $posts);
-
 		// By default, and at best, a guest can only access static
 		// pages via the PagesController's display action
 		$this->Auth->allow('display');
