@@ -53,5 +53,10 @@
 			<td>760-795-6890</td>
 			<td></td>
 		</tr>
+		<tr>
+			<td>Jonathan Jimenez</td>
+			<td>760-216-0203</td>
+			<td>jon@jonjmz.com</td>
+		</tr>
 	</table>
 </section>
