@@ -316,11 +316,11 @@
 /* http://www.fontsquirrel.com/license/scifly */
 @font-face {
     font-family: 'SciFly';
-    src: url('../fonts/scifly/scifly-sans-webfont.eot');
-    src: url('../fonts/scifly/scifly-sans-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/scifly/scifly-sans-webfont.woff') format('woff'),
-         url('../fonts/scifly/scifly-sans-webfont.ttf') format('truetype'),
-         url('../fonts/scifly/scifly-sans-webfont.svg#sciflysans') format('svg');
+    src: url('../fonts/SciflySans/scifly.eot');
+    src: url('../fonts/SciflySans/scifly.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/SciflySans/scifly.woff') format('woff'),
+         url('../fonts/SciflySans/scifly.ttf') format('truetype'),
+         url('../fonts/SciflySans/scifly.svg#sciflysans') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -328,21 +328,21 @@
 /* http://www.fontsquirrel.com/license/laconic */
 @font-face {
     font-family: 'Laconic';
-    src: url('../fonts/laconic/laconic_regular-webfont.eot');
-    src: url('../fonts/laconic/laconic_regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/laconic/laconic_regular-webfont.woff') format('woff'),
-         url('../fonts/laconic/laconic_regular-webfont.ttf') format('truetype'),
-         url('../fonts/laconic/laconic_regular-webfont.svg#laconicregular') format('svg');
+    src: url('../fonts/Laconic/laconic.eot');
+    src: url('../fonts/Laconic/laconic.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Laconic/laconic.woff') format('woff'),
+         url('../fonts/Laconic/laconic.ttf') format('truetype'),
+         url('../fonts/Laconic/laconic.svg#laconicregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'Laconic';
-    src: url('../fonts/laconic/laconic_bold-webfont.eot');
-    src: url('../fonts/laconic/laconic_bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/laconic/laconic_bold-webfont.woff') format('woff'),
-         url('../fonts/laconic/laconic_bold-webfont.ttf') format('truetype'),
-         url('../fonts/laconic/laconic_bold-webfont.svg#laconicbold') format('svg');
+    src: url('../fonts/Laconic/laconicBold.eot');
+    src: url('../fonts/Laconic/laconicBold.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Laconic/laconicBold.woff') format('woff'),
+         url('../fonts/Laconic/laconicBold.ttf') format('truetype'),
+         url('../fonts/Laconic/laconicBold.svg#laconicbold') format('svg');
     font-weight: bold;
     font-style: normal;
 }
@@ -350,11 +350,11 @@
  * the .light class */
 @font-face {
     font-family: 'Laconic';
-    src: url('../fonts/laconic/laconic_light-webfont.eot');
-    src: url('../fonts/laconic/laconic_light-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/laconic/laconic_light-webfont.woff') format('woff'),
-         url('../fonts/laconic/laconic_light-webfont.ttf') format('truetype'),
-         url('../fonts/laconic/laconic_light-webfont.svg#laconiclight') format('svg');
+    src: url('../fonts/Laconic/laconicLight.eot');
+    src: url('../fonts/Laconic/laconicLight.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Laconic/laconicLight.woff') format('woff'),
+         url('../fonts/Laconic/laconicLight.ttf') format('truetype'),
+         url('../fonts/Laconic/laconicLight.svg#laconiclight') format('svg');
     font-weight: 200;
     font-style: normal;
 }
@@ -362,31 +362,31 @@
 /* http://dejavu-fonts.org/wiki/License */
 @font-face {
     font-family: 'DejaVu Sans Mono';
-    src: url('../fonts/dejavusansmono/dejavusansmono-webfont.eot');
-    src: url('../fonts/dejavusansmono/dejavusansmono-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/dejavusansmono/dejavusansmono-webfont.woff') format('woff'),
-         url('../fonts/dejavusansmono/dejavusansmono-webfont.ttf') format('truetype'),
-         url('../fonts/dejavusansmono/dejavusansmono-webfont.svg#dejavu_sans_monobook') format('svg');
+    src: url('../fonts/DejaVuSansMono/dvsm.eot');
+    src: url('../fonts/DejaVuSansMono/dvsm.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/DejaVuSansMono/dvsm.woff') format('woff'),
+         url('../fonts/DejaVuSansMono/dvsm.ttf') format('truetype'),
+         url('../fonts/DejaVuSansMono/dvsm.svg#dejavu_sans_monobook') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'DejaVu Sans Mono';
-    src: url('../fonts/dejavusansmono/dejavusansmono-bold-webfont.eot');
-    src: url('../fonts/dejavusansmono/dejavusansmono-bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/dejavusansmono/dejavusansmono-bold-webfont.woff') format('woff'),
-         url('../fonts/dejavusansmono/dejavusansmono-bold-webfont.ttf') format('truetype'),
-         url('../fonts/dejavusansmono/dejavusansmono-bold-webfont.svg#dejavu_sans_monobold') format('svg');
+    src: url('../fonts/DejaVuSansMono/dvsmBold.eot');
+    src: url('../fonts/DejaVuSansMono/dvsmBold.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/DejaVuSansMono/dvsmBold.woff') format('woff'),
+         url('../fonts/DejaVuSansMono/dvsmBold.ttf') format('truetype'),
+         url('../fonts/DejaVuSansMono/dvsmBold.svg#dejavu_sans_monobold') format('svg');
     font-weight: bold;
     font-style: normal;
 }
 @font-face {
     font-family: 'DejaVu Sans Mono';
-    src: url('../fonts/dejavusansmono/dejavusansmono-oblique-webfont.eot');
-    src: url('../fonts/dejavusansmono/dejavusansmono-oblique-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/dejavusansmono/dejavusansmono-oblique-webfont.woff') format('woff'),
-         url('../fonts/dejavusansmono/dejavusansmono-oblique-webfont.ttf') format('truetype'),
-         url('../fonts/dejavusansmono/dejavusansmono-oblique-webfont.svg#dejavu_sans_monooblique') format('svg');
+    src: url('../fonts/DejaVuSansMono/dvsmoOblique.eot');
+    src: url('../fonts/DejaVuSansMono/dvsmoOblique.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/DejaVuSansMono/dvsmoOblique.woff') format('woff'),
+         url('../fonts/DejaVuSansMono/dvsmoOblique.ttf') format('truetype'),
+         url('../fonts/DejaVuSansMono/dvsmoOblique.svg#dejavu_sans_monooblique') format('svg');
     font-weight: normal;
     font-style: italic;
 }
