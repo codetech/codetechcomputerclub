@@ -10,6 +10,16 @@ Projects
 	- Whenever someone posts on a project, an update message should be sent to subscribers containing the poster and the post message.
 	- Sending an update message:
 		- All subscribers should receive an email saying what happened ("project X updated", "someone commented" etc) and maybe an SMS too.
+		- Example of sending an email is currently in `UsersController`.
+
+
+UsersController
+---------------
+
+- Consider removing email functionality from here since it doesn't really belong here.
+- Consider making a new `EmailController` to handle all of our email needs.
+	- It may only need the `send_email()` and `send_text()` methods.
+	- It would also be need to be usable through the subscription API. HMMM. Maybe Emails don't need a controller, maybe their functionality just needs to be wrapped-up in a nice easy-to-use package that can be dropped into any class and using it would be as simple as calling `send_email('title', 'message');`. How should we do that...
 
 
 SMS-related
