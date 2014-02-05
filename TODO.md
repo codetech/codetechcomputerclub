@@ -34,3 +34,21 @@ SMS-related
 		- This is the alternative to looping through the multiple gateways that a user has, as it is currently implemented.
 - Remove the "max 5 carriers" check in `User->beforeSave()` (after implementing the above)
 
+
+Email and Phone Image Generation
+--------------------------------
+
+- Find a way to make the API sane (maybe setup some better default settings)
+	- See `UsersController->view()` for an example of this atrocity.
+- Or just remove it, and only show contact info to logged in members (would solve the scraping problem).
+
+
+Sidebar
+-------
+
+- None at the moment
+
+
+Random
+------
+- none at the moment
