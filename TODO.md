@@ -35,6 +35,4 @@ Email and Phone Image Generation
 
 Random
 ------
-
-- Change the names of the fonts in the `webroot/fonts/` folder to all be consistently-named, and preferably shorter. Removing "webfont" from the beginning of all them would be a good start.
-    - Double-check that all paths throughout the project are updated.
+-none at the moment
