@@ -28,7 +28,7 @@
 	<ul class="bullet-list">
 		<?php foreach ($this->Sidebar->getPosts() as $post): ?>
 		<li><?php echo $this->Html->link($post['Post']['title'],
-	            array('controller'=>'posts', 'action' => 'view', $post['Post']['id']));?></li>
+	            array('controller'=>'posts', 'action' => 'view', $post['Post']['slug']));?></li>
 		<?php endforeach; ?>
 	</ul>
 </section>

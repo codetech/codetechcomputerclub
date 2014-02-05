@@ -46,7 +46,7 @@ php bin/composer.phar install
 c:\php\php.exe bin\composer.phar install
 ```
 
-If the above command doesn't work, [Install Composer on your system](https://getcomposer.org/Composer-Setup.exe) and then (in the `codetechcomputerclub` folder) issue the following command:
+If the above command doesn't work, [install Composer on your system](https://getcomposer.org/Composer-Setup.exe) and then (in the `codetechcomputerclub` folder) issue the following command:
 
 ```bat
 composer install
@@ -103,4 +103,4 @@ Contact
 
 This project is led by Jackson Ray Hamilton (jackson@jacksonrayhamilton.com). Email him if you want to help out!
 
-Further contact info is also available on our [Contact page](http://www.codetechcomputerclub.com/contact).
+Further contact info is also available on our [About page](http://www.codetechcomputerclub.com/about).
