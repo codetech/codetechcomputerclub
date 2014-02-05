@@ -46,8 +46,7 @@ Email and Phone Image Generation
 Sidebar
 -------
 
-- Use Cake's `Containable` behavior to optimize the posts and projects queries.
-	- Only get the `title` and `slug` (the `id` will get pulled down inevitably I think).
+- None at the moment
 
 
 Random
