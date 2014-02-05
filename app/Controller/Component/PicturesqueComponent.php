@@ -70,4 +70,21 @@ class PicturesqueComponent extends Component {
 		
 		return $returnPath;
 	}
+	public function userPreset($text, $filename, $id){
+		return $this->createText(
+			$text,
+			$filename .'.png',
+			'users' . DS . $id,
+			array(
+				//'overwrite' => true, // Uncomment for testing.
+				'fontFace' => 'DejaVuSansMono/dvsm.ttf',
+				'fontSize' => 11,
+				'rgb' => array(71, 79, 81),
+				'width' => 11 * strlen($text),
+				'height' => 20,
+				'x' => 3,
+				'y' => 15
+			)
+		);
+	}
 }

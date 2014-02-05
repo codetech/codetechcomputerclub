@@ -104,39 +104,16 @@ class UsersController extends AppController {
 		
 		// Create images of user data to protect it from scrapers.
 		if (!empty($user['User']['email'])) {
-			$this->set('emailImagePath', $this->Picturesque->createText(
+			$this->set('emailImagePath', $this->Picturesque->userPreset(
 				$user['User']['email'],
-				'email.png',
-				'users' . DS . $user['User']['id'],
-				array(
-					//'overwrite' => true, // Uncomment for testing.
-					'fontFace' => 'dejavusansmono/dejavusansmono-webfont.ttf',
-					'fontSize' => 11,
-					'rgb' => array(71, 79, 81),
-					'width' => 11 * strlen($user['User']['email']),
-					'height' => 20,
-					'x' => 3,
-					'y' => 15
-				)
-			));
+				'email',
+				$user['User']['id']));
 		}
-		
 		if (!empty($user['User']['phone'])) {
-			$this->set('phoneImagePath', $this->Picturesque->createText(
+			$this->set('phoneImagePath', $this->Picturesque->userPreset(
 				$user['User']['phone'],
-				'phone.png',
-				'users' . DS . $user['User']['id'],
-				array(
-					//'overwrite' => true, // Uncomment for testing.
-					'fontFace' => 'dejavusansmono/dejavusansmono-webfont.ttf',
-					'fontSize' => 11,
-					'rgb' => array(71, 79, 81),
-					'width' => 11 * strlen($user['User']['phone']),
-					'height' => 20,
-					'x' => 3,
-					'y' => 15
-				)
-			));
+				'phone',
+				$user['User']['id']));
 		}
 		
 		// If the user is associated with any projects, create lists of
