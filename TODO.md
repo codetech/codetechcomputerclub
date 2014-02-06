@@ -24,3 +24,11 @@ SMS-related
 	- For the `address` field, if that carrier has more than 1 address (for example AT&T seems to have `mobile.att.net` and `txt.att.net`), use a comma-separated list of all the addresses (for example: `mobile.att.net,txt.att.net`). After fetching data in the application, use php's `explode()` on the address field to get all the addresses to send the SMS to.
 		- This is the alternative to looping through the multiple gateways that a user has, as it is currently implemented.
 - Remove the "max 5 carriers" check in `User->beforeSave()` (after implementing the above)
+
+
+EmailComponent
+--------------
+
+- Generalize `sendEmail()` and `sendText()` so that they can also send messages to subsets of users, for example only the users who are involved in X project will receive the message.
+	- One option might be to pass an array of arguments to apply to `$this->User->find()` via php's `call_user_func_array()`.
+	- By default it could send messages out to everyone. The above array of arguments is an optional argument.

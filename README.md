@@ -97,6 +97,10 @@ SetEnv CAKEPHP_DEBUG 1
     - Make sure to add `ctcc.local` to the `/etc/hosts` file (Linux / Mac), or the `C:\Windows\System32\drivers\etc\hosts` file (Windows).
     - Make sure to properly enable virtual hosts in `apache2.conf` or `httpd.conf`. (This process is different for every system, so have fun Googling.)
 
+### Set up emails (optional):
+
+- Make a copy of `app/Config/email.php.default` named `app/Config/email.php`- Fill out your Google credentials in the `$gmail` array.
+
 
 Contact
 -------

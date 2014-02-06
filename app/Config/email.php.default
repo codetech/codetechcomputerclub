@@ -45,15 +45,22 @@ class EmailConfig {
 		//'charset' => 'utf-8',
 		//'headerCharset' => 'utf-8',
 	);
-
-	public $smtp = array(
+	
+	// Attention to anyone developing the site:
+	// To test anything email-related, first copy and rename this
+	// file as `email.php`, then in the new file fill out your
+	// Google credentials here. Then all emails will be sent via their
+	// free smtp service from your account.
+	public $gmail = array(
 		'transport' => 'Smtp',
-		'from' => array('site@localhost' => 'My Site'),
-		'host' => 'localhost',
-		'port' => 25,
+		'from' => array(
+			'<YOUR_GOOGLE_ACCOUNT_NAME_HERE>@gmail.com' => 'codeTech Computer Club'
+		),
+		'host' => 'ssl://smtp.gmail.com',
+		'port' => 465,
 		'timeout' => 30,
-		'username' => 'user',
-		'password' => 'secret',
+		'username' => '<YOUR_GOOGLE_ACCOUNT_NAME_HERE>@gmail.com',
+		'password' => '<YOUR_GOOGLE_PASSWORD_HERE>',
 		'client' => null,
 		'log' => false,
 		//'charset' => 'utf-8',

@@ -260,7 +260,8 @@ class UsersController extends AppController {
 	}
 
 /**
- * Send email page.
+ * Mass email sending page. Sends the posted email out to all users
+ * who have opted to receive emails.
  * 
  * Only accessible by admins.
  * 
@@ -271,16 +272,27 @@ class UsersController extends AppController {
 			$this->Email->sendEmail(
 				$this->request->data['Email']['title'],
 				$this->request->data['Email']['html_message'],
-				$this->request->data['Email']['text_message']);
+				$this->request->data['Email']['text_message']
+			);
 			$this->Session->setFlash('The emails have been sent.');
 			return $this->redirect(array('action' => 'index'));
 		}
 	}
-	
+
+/**
+ * Mass text message sending page. Sends the posted text out to all users
+ * who have opted to receive texts.
+ * 
+ * Only accessible by admins.
+ * 
+ * @return void
+ */
 	public function send_text() {
 		if ($this->request->is('post')) {
-			$this->Email->sendText($this->request->data['Email']['text_message']);
-			$this->Session->setFlash('The text has been sent.');
+			$this->Email->sendText(
+				$this->request->data['Email']['text_message']
+			);
+			$this->Session->setFlash('The texts have been sent.');
 			return $this->redirect(array('action' => 'index'));
 		}
 	}
