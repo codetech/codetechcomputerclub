@@ -99,7 +99,8 @@ SetEnv CAKEPHP_DEBUG 1
 
 ### Set up emails (optional):
 
-- Make a copy of `app/Config/email.php.default` named `app/Config/email.php`- Fill out your Google credentials in the `$gmail` array.
+- Make a copy of `app/Config/email.php.default` named `app/Config/email.php`
+- Fill out your Google credentials in the `$gmail` array.
 
 
 Contact
