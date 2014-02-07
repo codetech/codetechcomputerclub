@@ -17,6 +17,14 @@ Live Website
 [codetechcomputerclub.com](http://codetechcomputerclub.com)
 
 
+Contact
+-------
+
+This project is led by Jackson Ray Hamilton (jackson@jacksonrayhamilton.com). Email him if you want to help out!
+
+Further contact info is also available on our [About page](http://www.codetechcomputerclub.com/about).
+
+
 Installation
 ------------
 
@@ -25,8 +33,8 @@ The website has dependencies that need to be installed with [Composer](https://g
 ### Linux / Mac:
 
 1. Have git and php installed.
-    - Debian: `sudo apt-get install git php5`
-    - Mac (using [Homebrew](http://brew.sh/)): `brew install git`
+	- Debian: `sudo apt-get install git php5`
+	- Mac (using [Homebrew](http://brew.sh/)): `brew install git`
 2. Open a terminal and issue the following commands:
 
 ```bash
@@ -55,9 +63,9 @@ composer install
 ### Set up the database:
 
 1. A database schema is located at `bin/database.sql`. Run the commands contained therein to set up the website's database.
-    - In bash, you can issue the command `mysql < bin/database.sql`.
-    - In phpMyAdmin, you can click the "SQL" tab at the top of any page, copy and paste the contents of `database.sql` into the "Run SQL query/queries" form, and click "Go".
-    - Or look up "how to execute SQL queries in MySQL".
+	- In bash, you can issue the command `mysql < bin/database.sql`.
+	- In phpMyAdmin, you can click the "SQL" tab at the top of any page, copy and paste the contents of `database.sql` into the "Run SQL query/queries" form, and click "Go".
+	- Or look up "how to execute SQL queries in MySQL".
 2. Make a copy of `app/Config/database.php.default` named `database.php`. Fill out your credentials in the `$development` array, and change the `__construct()` function if you want to use a ServerName other than `localhost` or `ctcc.local`.
 
 ### Configure Apache:
@@ -70,10 +78,10 @@ Open up `/etc/apache2/apache2.conf`, or `httpd.conf` (wherever it may be on your
 DocumentRoot "/var/www/app/webroot"
 SetEnv CAKEPHP_DEBUG 1
 <Directory "/var/www">
-    AllowOverride all
-    Order allow,deny
-    Allow from all
-    Require all granted
+	AllowOverride all
+	Order allow,deny
+	Allow from all
+	Require all granted
 </Directory>
 ```
 
@@ -81,31 +89,24 @@ SetEnv CAKEPHP_DEBUG 1
 
 ```apache
 <VirtualHost *>
-    DocumentRoot "/var/www/ctcc/app/webroot"
-    ServerName ctcc.local
-    SetEnv CAKEPHP_DEBUG 1
-    <Directory "/var/www/ctcc">
-        AllowOverride all
-        Order allow,deny
-        Allow from all
-        Require all granted
-    </Directory>
+	DocumentRoot "/var/www/ctcc/app/webroot"
+	ServerName ctcc.local
+	SetEnv CAKEPHP_DEBUG 1
+	<Directory "/var/www/ctcc">
+		AllowOverride all
+		Order allow,deny
+		Allow from all
+		Require all granted
+	</Directory>
 </VirtualHost>
 ```
 
 - And also, if using virtual hosts:
-    - Make sure to add `ctcc.local` to the `/etc/hosts` file (Linux / Mac), or the `C:\Windows\System32\drivers\etc\hosts` file (Windows).
-    - Make sure to properly enable virtual hosts in `apache2.conf` or `httpd.conf`. (This process is different for every system, so have fun Googling.)
+	- Make sure to add `ctcc.local` to the `/etc/hosts` file (Linux / Mac), or the `C:\Windows\System32\drivers\etc\hosts` file (Windows).
+	- Make sure to properly enable virtual hosts in `apache2.conf` or `httpd.conf`. (This process is different for every system, so have fun Googling.)
 
-### Set up emails (optional):
+### Set up emails:
 
-- Make a copy of `app/Config/email.php.default` named `app/Config/email.php`
+- Make a copy of `app/Config/email.php.default` named `app/Config/email.php`.
 - Fill out your Google credentials in the `$gmail` array.
-
-
-Contact
--------
-
-This project is led by Jackson Ray Hamilton (jackson@jacksonrayhamilton.com). Email him if you want to help out!
-
-Further contact info is also available on our [About page](http://www.codetechcomputerclub.com/about).
+	- This file is untracked, so don't worry about your credentials leaking out.

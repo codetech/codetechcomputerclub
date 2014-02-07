@@ -1,18 +1,26 @@
 <?php
 App::uses('Component', 'Controller');
 class EmailComponent extends Component {
+	
 	/**
-	 * Sends email to all users who have opted to revive one
+	 * Sends emails to users who have opted to receive them.
 	 * 
 	 * @params string $subject Subject line of email.
 	 * @params string $messageHtml html to send.
 	 * @params string $messagePlain Text to send if html is not accepted.
 	 */
-	public function sendEmail($subject, $messageHtml, $messagePlain) {
+	public function sendEmail($subject, $messageHtml, $messagePlain,
+			$conditions = array()) {
+		
 		$this->User = ClassRegistry::init('User');
-		// Grab all email addressed which have opted to receive emails.
+		
+		// Grab all users who have opted to receive emails, plus any optional
+		// extra conditions.
 		$emails = $this->User->find('list', array(
-			'conditions' => array('User.receiveemail' => true),
+			'conditions' => array_merge(array(
+				'User.receiveemail' => true),
+				$conditions
+			),
 			'fields' => array('User.email')
 		));
 		
@@ -32,36 +40,33 @@ class EmailComponent extends Component {
 			))
 			->send();
 	}
+	
 /**
- * Sends email to all users who have opted to revive one
+ * Sends text messages to users who have opted to receive them.
  * 
  * @params string $message Message text to send.
  */
-	public function sendText($message) {
+	public function sendText($message, $conditions = array()) {
+		
 		$this->User = ClassRegistry::init('User');
+		
 		// Select only relevant phone and address information.
-		$numbers = $this->User->find('all', array(
-			'conditions' => array(
+		$dataset = $this->User->find('all', array(
+			'conditions' => array_merge(array(
 				'User.receivesms' => true,
-				'User.phone !=' => ''
+				'User.phone !=' => ''),
+				$conditions
 			),
 			'fields' => array('User.phone'),
 			'contain' => array('Gateway.address'),
 		));
 		
 		// Generate SMS email addresses.
-		// To prevent abuse, only send up to 5 texts for each User.
-		// Counting the texts probably isn't necessary now that limits
-		// are imposed at the Model level. Remove that check when things
-		// feel safe.
 		$emails = array();
-		foreach ($numbers as $number) {
-			$pureNumber = preg_replace('/[^0-9]/', '', $number['User']['phone']);
-			$textsGenerated = 0;
-			foreach ($number['Gateway'] as $gateway) {
-				if ($textsGenerated === 5) break;
-				array_push($emails, $pureNumber . '@' . $gateway['address']);
-				$textsGenerated++;
+		foreach ($dataset as $data) {
+			$onlyTheDigits = preg_replace('/[^0-9]/', '', $data['User']['phone']);
+			foreach ($data['Gateway'] as $gateway) {
+				array_push($emails, $onlyTheDigits . '@' . $gateway['address']);
 			}
 		}
 		
@@ -78,6 +83,5 @@ class EmailComponent extends Component {
 				'textContent' => $message,
 			))
 			->send();
-		
 	}
 }
