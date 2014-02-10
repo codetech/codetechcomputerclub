@@ -103,13 +103,13 @@ class UsersController extends AppController {
 		));
 		
 		// Create images of user data to protect it from scrapers.
-		if (!empty($user['User']['email'])) {
+		if ($user['User']['displayemail'] && !empty($user['User']['email'])) {
 			$this->set('emailImagePath', $this->Picturesque->userPreset(
 				$user['User']['email'],
 				'email',
 				$user['User']['id']));
 		}
-		if (!empty($user['User']['phone'])) {
+		if ($user['User']['displayphone'] && !empty($user['User']['phone'])) {
 			$this->set('phoneImagePath', $this->Picturesque->userPreset(
 				$user['User']['phone'],
 				'phone',

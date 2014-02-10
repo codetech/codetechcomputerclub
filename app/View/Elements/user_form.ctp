@@ -26,6 +26,11 @@
 			echo $this->Form->input('email', array(
 				'label' => ($this->action === 'add' ? 'Email *' : 'Email')
 			));
+			if ($this->action === 'edit') {
+				echo $this->Form->input('displayemail', array(
+					'label' => 'Display Email Publicly'
+				));
+			}
 			if ($this->action === 'add') {
 				echo $this->Form->input('password', array(
 					'label' => 'Password *'
@@ -37,6 +42,11 @@
 			echo $this->Form->input('phone', array(
 				'label' => 'Phone Number'
 			));
+			if ($this->action === 'edit') {
+				echo $this->Form->input('displayphone', array(
+					'label' => 'Display Phone Number Publicly'
+				));
+			}
 			echo $this->Form->input('Gateway', array(
 				'label' => 'Carrier (select up to 5)',
 				'empty' => array(null => 'None')
