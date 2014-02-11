@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 11, 2014 at 03:20 AM
+-- Generation Time: Feb 11, 2014 at 07:58 AM
 -- Server version: 5.5.34
 -- PHP Version: 5.4.22
 
@@ -202,6 +202,23 @@ INSERT INTO `projects_users` (`id`, `user_id`, `project_id`) VALUES
 (13, 3, 6),
 (14, 4, 6),
 (15, 1, 7);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subscriptions`
+--
+
+CREATE TABLE IF NOT EXISTS `subscriptions` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `project_id` bigint(20) unsigned NOT NULL,
+  `receive_update_email` tinyint(1) NOT NULL DEFAULT '1',
+  `receive_update_sms` tinyint(1) NOT NULL DEFAULT '1',
+  `receive_comment_email` tinyint(1) NOT NULL DEFAULT '1',
+  `receive_comment_sms` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
