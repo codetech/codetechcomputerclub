@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 11, 2014 at 07:58 AM
+-- Generation Time: Feb 11, 2014 at 10:45 AM
 -- Server version: 5.5.34
 -- PHP Version: 5.4.22
 
@@ -73,19 +73,14 @@ CREATE TABLE IF NOT EXISTS `gateways` (
 
 INSERT INTO `gateways` (`id`, `carrier`, `address`) VALUES
 (27, 'AT&T', 'txt.att.net'),
-(28, 'AT&T Enterprise Paging', 'page.att.net'),
-(29, 'AT&T Free2Go', 'mmode.com'),
 (50, 'Boost Mobile', 'myboostmobile.com'),
 (102, 'Cricket Wireless', 'sms.mycricket.com'),
-(163, 'Metro PCS', 'metropcs.sms.us'),
 (164, 'Metro PCS', 'mymetropcs.com'),
 (269, 'Sprint', 'messaging.sprintpcs.com'),
-(270, 'Sprint', 'sprintpaging.com'),
 (295, 'T-Mobile', 'tmomail.net'),
 (313, 'US Cellular', 'email.uscc.net'),
 (318, 'Verizon', 'vtext.com'),
-(323, 'Virgin Mobile', 'vmobl.com '),
-(324, 'Virgin Mobile', 'vxtras.com');
+(323, 'Virgin Mobile', 'vmobl.com ');
 
 -- --------------------------------------------------------
 
@@ -98,7 +93,18 @@ CREATE TABLE IF NOT EXISTS `gateways_users` (
   `gateway_id` bigint(20) unsigned NOT NULL,
   `user_id` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `gateways_users`
+--
+
+INSERT INTO `gateways_users` (`id`, `gateway_id`, `user_id`) VALUES
+(2, 50, 1),
+(3, 318, 8),
+(4, 318, 9),
+(5, 269, 10),
+(6, 269, 11);
 
 -- --------------------------------------------------------
 
@@ -244,20 +250,24 @@ CREATE TABLE IF NOT EXISTS `users` (
   `displayphone` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `created`, `modified`, `name`, `email`, `password`, `studentid`, `phone`, `position`, `admin`, `profile`, `receiveemail`, `receivesms`, `displayemail`, `displayphone`) VALUES
-(1, '2014-01-26 00:09:47', '2014-01-30 05:29:25', 'Jackson Ray Hamilton', 'jackson@jacksonrayhamilton.com', '24c93471392191c3fee8f4fd19ae3dc66c7d2233', 'w7200734', '760-805-4304', 'Vice President', 1, '<p>Kekekeke.</p>\n<p>How about a code sample?</p>\n<pre><code class="json">{<br />  "welcome": "to the wonderful world",<br />  "of": null,<br />  "JSON": 1234<br />}<br /></code></pre>\n<p>Kekek.</p>', 1, 1, 1, 1),
+(1, '2014-01-26 00:09:47', '2014-02-11 10:20:38', 'Jackson Ray Hamilton', 'jackson@jacksonrayhamilton.com', '24c93471392191c3fee8f4fd19ae3dc66c7d2233', 'w7200734', '760-805-4304', 'Vice President', 1, '<p>Kekekeke.</p>\n<p>How about a code sample?</p>\n<pre><code class="json">{<br />  "welcome": "to the wonderful world",<br />  "of": null,<br />  "JSON": 1234<br />}<br /></code></pre>\n<p>Kekek.</p>', 1, 1, 1, 1),
 (2, '2014-01-26 06:00:39', '2014-01-30 00:27:11', 'Weakling', 'takua1995@gmail.com', '52a58c3673cd501129168fc24594999c3686fc6f', '', '', 'Member', 0, '', 0, 1, 1, 1),
 (3, '2014-01-26 07:53:59', '2014-01-30 00:27:22', 'Ooga Booga', 'ooga@booga.com', '52a58c3673cd501129168fc24594999c3686fc6f', '', '', 'Member', 0, '', 0, 1, 1, 1),
 (4, '2014-01-27 09:49:15', '2014-02-11 00:22:53', 'Nimrod Jenkins', 'n@nll.com', '24c93471392191c3fee8f4fd19ae3dc66c7d2233', 'w1234567', '760-777-7777', 'Member', 0, '', 0, 1, 1, 1),
 (5, '2014-01-29 04:21:46', '2014-01-30 00:27:51', 'Testy McTest', 'takuaninetyfive@gmail.com', '52a58c3673cd501129168fc24594999c3686fc6f', '', '', 'Member', 0, '', 1, 1, 1, 1),
 (6, '2014-01-30 05:30:45', '2014-01-30 07:25:40', 'Elaina Hamilton', 'e@e.com', '52a58c3673cd501129168fc24594999c3686fc6f', '', '760-585-6351', 'Member', 0, '', 0, 0, 1, 1),
-(7, '2014-01-30 07:42:45', '2014-02-10 01:47:30', 'Kyle', 'ksanclemente@live.com', '52a58c3673cd501129168fc24594999c3686fc6f', '', '(760) 484-8190', 'President', 1, '', 0, 0, 1, 1);
+(7, '2014-01-30 07:42:45', '2014-02-10 01:47:30', 'Kyle', 'ksanclemente@live.com', '52a58c3673cd501129168fc24594999c3686fc6f', '', '(760) 484-8190', 'President', 1, '', 0, 0, 1, 1),
+(8, '2014-02-11 10:25:28', '2014-02-11 10:25:28', 'asdf', 'q@q.com', '52a58c3673cd501129168fc24594999c3686fc6f', '', '', 'Member', 0, '', 1, 1, 1, 1),
+(9, '2014-02-11 10:26:59', '2014-02-11 10:26:59', 't', 't@b.com', '52a58c3673cd501129168fc24594999c3686fc6f', '', '', 'Member', 0, '', 1, 1, 1, 1),
+(10, '2014-02-11 10:28:29', '2014-02-11 10:28:29', 'y', 'y@y.com', '52a58c3673cd501129168fc24594999c3686fc6f', '', '', 'Member', 0, '', 1, 1, 1, 1),
+(11, '2014-02-11 10:30:28', '2014-02-11 10:36:31', '7', '7@11.com', '52a58c3673cd501129168fc24594999c3686fc6f', '', '', 'Member', 0, '', 1, 1, 1, 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

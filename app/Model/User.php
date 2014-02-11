@@ -182,35 +182,6 @@ class User extends AppModel {
 		
 		$id = $this->data[$this->alias][$this->primaryKey];
 		
-		// Prevent the user from adding more than 5 carriers.
-		if (isset($this->data['Gateway'])) {
-			
-			// Check if he's trying to submit more than 5; auto-fail.
-			$newGatewayCount = count($this->data['Gateway']['Gateway']);
-			if ($newGatewayCount > 5) {
-				return false;
-			}
-			
-			// Otherwise, if he's editing himself, count up all the ones he
-			// already has and add them to the ones he's trying to submit
-			// and see if he exceeds the limit then.
-			if ($this->exists($id)) {
-				$existingGateways = $this->find('all', array(
-					'conditions' => array(
-						'User.id' => $id
-					),
-					'fields' => array('User.id'),
-					'contain' => array('Gateway.id'),
-				));
-				$existingGatewayCount = count($existingGateways['Gateway']);
-			} else {
-				$existingGatewayCount = 0;
-			}
-			if ($newGatewayCount + $existingGatewayCount > 5) {
-				return false;
-			}
-		}
-		
 		$imageDir = WWW_ROOT . 'img' . DS . 'users' . DS . $id . DS;
 		
 		// If any data changed that has images generated for it, delete the

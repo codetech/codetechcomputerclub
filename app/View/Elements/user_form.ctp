@@ -48,18 +48,17 @@
 				));
 			}
 			echo $this->Form->input('Gateway', array(
-				'label' => 'Carrier (select up to 5)',
-				'empty' => array(null => 'None')
-			));
-			echo $this->Form->input('receiveemail', array(
-				'label' => 'Receive Emails',
-				'checked' => ($this->action === 'add' ? true : null)
-			));
-			echo $this->Form->input('receivesms', array(
-				'label' => 'Receive SMS Texts',
-				'checked' => ($this->action === 'add' ? true : null)
+				'label' => 'Carrier',
+				'empty' => array(null => 'None'),
+				'multiple' => false
 			));
 			if ($this->action === 'edit') {
+				echo $this->Form->input('receiveemail', array(
+					'label' => 'Receive Emails'
+				));
+				echo $this->Form->input('receivesms', array(
+					'label' => 'Receive SMS Texts'
+				));
 				echo $this->Form->input('profile', array(
 					'label' => '"About Me" Profile Text',
 					'type' => 'textarea',

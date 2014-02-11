@@ -16,7 +16,7 @@
 	<?php if (!empty($user['User']['displayemail']) || !empty($user['User']['displayphone'])): ?>
 		<h3>Contact Info</h3>
 		
-		<?php if (!empty($user['User']['displayemail'])): ?>
+		<?php if (isset($emailImagePath)): ?>
 		
 			<b>Email:</b> 
 			<?php echo $this->Html->image($emailImagePath, array(
@@ -25,7 +25,7 @@
 			)); ?><br>
 			
 		<?php endif; ?>
-		<?php if (!empty($user['User']['displayphone'])): ?>
+		<?php if (isset($phoneImagePath)): ?>
 		
 			<b>Phone:</b> 
 			<?php echo $this->Html->image($phoneImagePath, array(
