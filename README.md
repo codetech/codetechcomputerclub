@@ -22,7 +22,7 @@ Contact
 
 This project is led by Jackson Ray Hamilton (jackson@jacksonrayhamilton.com). Email him if you want to help out!
 
-Further contact info is also available on our [About page](http://www.codetechcomputerclub.com/about).
+Further contact info is also available on our [Contact page](http://www.codetechcomputerclub.com/contact).
 
 
 Installation
