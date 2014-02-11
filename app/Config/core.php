@@ -38,7 +38,7 @@
 	}
 	// Production
 	else {
-		Configure::write('debug', 1);
+		Configure::write('debug', 0);
 	}
 
 /**
