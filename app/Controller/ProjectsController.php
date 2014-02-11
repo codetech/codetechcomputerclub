@@ -79,8 +79,6 @@ class ProjectsController extends AppController {
 			}
 			$this->set('users', $users);
 		}
-		var_dump($users);
-		exit;
 		$this->set('isOwner', isset($loggedInUser) && $this->Project->isOwnedBy($id, $loggedInUser['id']));
 		$this->set('isSubscribed', $isSubscribed);
 		$this->set('project', $project);
