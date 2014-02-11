@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 11, 2014 at 12:26 AM
+-- Generation Time: Feb 11, 2014 at 03:20 AM
 -- Server version: 5.5.34
 -- PHP Version: 5.4.22
 
@@ -72,28 +72,18 @@ CREATE TABLE IF NOT EXISTS `gateways` (
 --
 
 INSERT INTO `gateways` (`id`, `carrier`, `address`) VALUES
-(26, 'AT&T', 'mobile.att.net'),
 (27, 'AT&T', 'txt.att.net'),
 (28, 'AT&T Enterprise Paging', 'page.att.net'),
 (29, 'AT&T Free2Go', 'mmode.com'),
-(30, 'AT&T PCS', 'mobile.att.net'),
-(31, 'AT&T Pocketnet PCS', 'dpcs.mobile.att.net'),
 (50, 'Boost Mobile', 'myboostmobile.com'),
 (102, 'Cricket Wireless', 'sms.mycricket.com'),
 (163, 'Metro PCS', 'metropcs.sms.us'),
 (164, 'Metro PCS', 'mymetropcs.com'),
-(268, 'Sprint', 'cingularme.com'),
 (269, 'Sprint', 'messaging.sprintpcs.com'),
 (270, 'Sprint', 'sprintpaging.com'),
 (295, 'T-Mobile', 'tmomail.net'),
-(296, 'T-Mobile', 'voicestream.net'),
 (313, 'US Cellular', 'email.uscc.net'),
-(314, 'US Cellular', 'smtp.uscc.net'),
-(315, 'US Cellular', 'uscc.textmsg.com'),
 (318, 'Verizon', 'vtext.com'),
-(319, 'Verizon Pagers', 'myairmail.com'),
-(320, 'Verizon PCS', 'myvzw.com'),
-(321, 'Verizon PCS', 'vtext.com'),
 (323, 'Virgin Mobile', 'vmobl.com '),
 (324, 'Virgin Mobile', 'vxtras.com');
 
@@ -108,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `gateways_users` (
   `gateway_id` bigint(20) unsigned NOT NULL,
   `user_id` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=376 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
