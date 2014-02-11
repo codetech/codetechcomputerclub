@@ -19,10 +19,21 @@
 			<td><?php echo h($project['Project']['status']); ?></td>
 		</tr>
 		<tr>
-			<th colspan="4">Involved Members</th>
+			<th colspan="3">Involved Members</th>
+			<td rowspan="2">
+			<?php if($isSubscribed):?>
+			<?php echo $this->Form->create(null, array('url' => array('controller' => 'projects', 'action' => 'unsubscribe'))); ?> 
+			<?php echo $this->Form->submit('Un-Subscribe',array('class'=>'button-small gray')); ?> 
+			<?php else: ?>
+			<?php echo $this->Form->create(null, array('url' => array('controller' => 'projects', 'action' => 'subscribe'))); ?> 
+			<?php echo $this->Form->submit('Subscribe',array('class'=>'button-small')); ?> 
+			<?php endif;?>
+			<?php echo $this->Form->hidden($project['Project']['id']);?>
+			<?php echo $this->Form->end(); ?> 
+			</td>
 		</tr>
 		<tr>
-			<td colspan="4">
+			<td colspan="3">
 				<?php if (isset($users)): ?>
 					<?php for ($i = 0, $j = count($users); $i < $j; $i++): ?>
 						<?php $user = $users[$i]; ?>
