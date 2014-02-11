@@ -22,13 +22,13 @@
 			<th colspan="3">Involved Members</th>
 			<td rowspan="2">
 			<?php if($isSubscribed):?>
-			<?php echo $this->Form->create(null, array('url' => array('controller' => 'projects', 'action' => 'unsubscribe'))); ?> 
+			<?php echo $this->Form->create(null, array('url' => array('controller' => 'projects', 'action' => 'unsubscribe')));?> 
 			<?php echo $this->Form->submit('Un-Subscribe',array('class'=>'button-small gray')); ?> 
 			<?php else: ?>
 			<?php echo $this->Form->create(null, array('url' => array('controller' => 'projects', 'action' => 'subscribe'))); ?> 
 			<?php echo $this->Form->submit('Subscribe',array('class'=>'button-small')); ?> 
 			<?php endif;?>
-			<?php echo $this->Form->hidden($project['Project']['id']);?>
+			<?php echo $this->Form->hidden(null,array('value'=>$project['Project']['id']));?>
 			<?php echo $this->Form->end(); ?> 
 			</td>
 		</tr>
