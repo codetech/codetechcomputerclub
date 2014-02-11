@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 11, 2014 at 10:45 AM
+-- Generation Time: Feb 11, 2014 at 12:27 PM
 -- Server version: 5.5.34
 -- PHP Version: 5.4.22
 
@@ -93,18 +93,18 @@ CREATE TABLE IF NOT EXISTS `gateways_users` (
   `gateway_id` bigint(20) unsigned NOT NULL,
   `user_id` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `gateways_users`
 --
 
 INSERT INTO `gateways_users` (`id`, `gateway_id`, `user_id`) VALUES
-(2, 50, 1),
 (3, 318, 8),
 (4, 318, 9),
 (5, 269, 10),
-(6, 269, 11);
+(6, 269, 11),
+(7, 27, 1);
 
 -- --------------------------------------------------------
 
@@ -178,40 +178,6 @@ INSERT INTO `projects` (`id`, `created`, `content`, `title`, `excerpt`, `publish
 -- --------------------------------------------------------
 
 --
--- Table structure for table `projects_users`
---
-
-CREATE TABLE IF NOT EXISTS `projects_users` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) unsigned NOT NULL,
-  `project_id` bigint(20) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
-
---
--- Dumping data for table `projects_users`
---
-
-INSERT INTO `projects_users` (`id`, `user_id`, `project_id`) VALUES
-(1, 1, 1),
-(2, 2, 1),
-(3, 1, 2),
-(4, 2, 2),
-(5, 1, 3),
-(6, 2, 3),
-(7, 3, 3),
-(8, 4, 4),
-(9, 5, 4),
-(10, 1, 5),
-(11, 2, 5),
-(12, 1, 6),
-(13, 3, 6),
-(14, 4, 6),
-(15, 1, 7);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `subscriptions`
 --
 
@@ -224,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `subscriptions` (
   `receive_comment_email` tinyint(1) NOT NULL DEFAULT '1',
   `receive_comment_sms` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
@@ -257,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `created`, `modified`, `name`, `email`, `password`, `studentid`, `phone`, `position`, `admin`, `profile`, `receiveemail`, `receivesms`, `displayemail`, `displayphone`) VALUES
-(1, '2014-01-26 00:09:47', '2014-02-11 10:20:38', 'Jackson Ray Hamilton', 'jackson@jacksonrayhamilton.com', '24c93471392191c3fee8f4fd19ae3dc66c7d2233', 'w7200734', '760-805-4304', 'Vice President', 1, '<p>Kekekeke.</p>\n<p>How about a code sample?</p>\n<pre><code class="json">{<br />  "welcome": "to the wonderful world",<br />  "of": null,<br />  "JSON": 1234<br />}<br /></code></pre>\n<p>Kekek.</p>', 1, 1, 1, 1),
+(1, '2014-01-26 00:09:47', '2014-02-11 11:00:51', 'Jackson Ray Hamilton', 'jackson@jacksonrayhamilton.com', '24c93471392191c3fee8f4fd19ae3dc66c7d2233', 'w7200734', '760-805-4304', 'Vice President', 1, '<p>Kekekeke.</p>\n<p>How about a code sample?</p>\n<pre><code class="json">{<br />  "welcome": "to the wonderful world",<br />  "of": null,<br />  "JSON": 1234<br />}<br /></code></pre>\n<p>Kekek.</p>', 1, 1, 1, 1),
 (2, '2014-01-26 06:00:39', '2014-01-30 00:27:11', 'Weakling', 'takua1995@gmail.com', '52a58c3673cd501129168fc24594999c3686fc6f', '', '', 'Member', 0, '', 0, 1, 1, 1),
 (3, '2014-01-26 07:53:59', '2014-01-30 00:27:22', 'Ooga Booga', 'ooga@booga.com', '52a58c3673cd501129168fc24594999c3686fc6f', '', '', 'Member', 0, '', 0, 1, 1, 1),
 (4, '2014-01-27 09:49:15', '2014-02-11 00:22:53', 'Nimrod Jenkins', 'n@nll.com', '24c93471392191c3fee8f4fd19ae3dc66c7d2233', 'w1234567', '760-777-7777', 'Member', 0, '', 0, 1, 1, 1),

@@ -178,28 +178,6 @@ class Project extends AppModel {
 		),
 	);
 
-
-/**
- * hasAndBelongsToMany associations
- *
- * @var array
- */
-	public $hasAndBelongsToMany = array(
-		'User' => array(
-			'className' => 'User',
-			'joinTable' => 'projects_users',
-			'foreignKey' => 'project_id',
-			'associationForeignKey' => 'user_id',
-			'unique' => 'keepExisting',
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'finderQuery' => '',
-		)
-	);
-
 /**
  * Behaviors that the Model uses.
  * 
@@ -208,6 +186,7 @@ class Project extends AppModel {
 	public $actsAs = array(
 		// Remove dangerous tags from saved project descriptions.
 		'Purify' => array('field' => 'content'),
-		'BelongsToUser'
+		'BelongsToUser',
+		'Containable'
 	);
 }

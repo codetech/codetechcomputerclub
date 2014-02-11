@@ -54,31 +54,30 @@ class ProjectsController extends AppController {
 					$this->Project->alias . '.' . $this->Project->primaryKey => $id,
 					$this->Project->alias . '.slug' => $id
 				)
-			)
+			),
+			'contain' => array('User', 'Comment', 'Post', 'Subscription' => array('User'))
 		);
 		$project = $this->Project->find('first', Set::merge($defaults, $options));
 		if (empty($project)) {
 			throw new NotFoundException('Invalid project.');
 		}
-		// Filter the users array into a regularly-indexed one.
-		// NOTE: CakePHP automatically generates arrays that have a bunch of
-		// data on the owner of the Project, mixed-in with numerically-indexed
-		// array items containing data on each project participant. Because
-		// of this you can't very easily iterate over it, so a filtered array
-		// makes iterating less painful.
-		$isSubscribed = false;
+		
+		// Put all the subscribed users in a single array.
+		// Also determine if the logged-in user is subscribed.
 		$loggedInUser = $this->Auth->user();
-		if (isset($project['User'])) {
-			$users = array();
-			foreach ($project['User'] as $key => $user) {
-				if (is_numeric($key)){
-					array_push($users, $user);
-					//if the loged-in user is subscribed
-					if($user['id'] == $loggedInUser['id']) $isSubscribed = true;
+		$isSubscribed = false;
+		$subscribedUsers = array();
+		if (isset($project['Subscription'])) {
+			foreach ($project['Subscription'] as $subscription) {
+				array_push($subscribedUsers, $subscription['User']);
+				// If the logged-in user is subscribed:
+				if ($subscription['User']['id'] === $loggedInUser['id']) {
+					$isSubscribed = true;
 				}
 			}
-			$this->set('users', $users);
 		}
+		$this->set('subscribedUsers', $subscribedUsers);
+		
 		$this->set('isOwner', isset($loggedInUser) && $this->Project->isOwnedBy($id, $loggedInUser['id']));
 		$this->set('isSubscribed', $isSubscribed);
 		$this->set('project', $project);
@@ -88,39 +87,69 @@ class ProjectsController extends AppController {
  *
  * @return void
  */
+	// Clean up this function, too many queries.
 	public function subscribe() {
-		$this->loadModel('Subscription');
 		if ($this->request->is('post')) { 
-			$post = $this->Project->find('first', 
-				array('conditions' => array('Project.id' => $this->data['Project'] )));
-			if (!$post===null) {
-				throw new NotFoundException(__('Invalid project'));
+			$project = $this->Project->find('first', array(
+				'conditions' => array(
+					'Project.id' => $this->data['Project']
+				)
+			));
+			if (!isset($project)) {
+				throw new NotFoundException('Invalid project');
 			}
-			$sub = $this->Subscription->find('first', 
-				array('conditions' => array(
-					'Subscription.project_Id' => $this->data['Project'],
-					'Subscription.user_Id' => $this->Auth->user('id') )));
-			if(empty($sub)){
+			$this->loadModel('Subscription');
+			$subscription = $this->Subscription->find('first', array(
+				'conditions' => array(
+					'AND' => array(
+						'Subscription.project_id' => $this->data['Project'],
+						'Subscription.user_id' => $this->Auth->user('id')
+					)
+				)
+			));
+			if (empty($subscription)) {
 				$this->Subscription->save(array(
 					'project_id' => $this->data['Project'],
 					'user_id' => $this->Auth->user('id')
-					));
+				));
+				$this->Session->setFlash('Subscribed to the project.');
+			} else {
+				$this->Session->setFlash('Already subscribed.');
 			}
-			$this->redirect(array('action' => 'view', $post['Project']['slug']));
+			$this->redirect(array('action' => 'view', $project['Project']['slug']));
 		}
 		$this->redirect(array('action' => 'index'));
 	}
+	
 /**
- * unsubscribe method
+ * unsubscribe method. Basically a delete method for subscriptions.
  *
  * @return void
  */
 	public function unsubscribe() {
 		if ($this->request->is('post')) {
-
+			$this->loadModel('Subscription');
+			$subscription = $this->Subscription->find('first', array(
+				'conditions' => array(
+					'AND' => array(
+						'Subscription.project_id' => $this->data['Project'],
+						'Subscription.user_id' => $this->Auth->user('id')
+					)
+				)
+			));
+			if (!isset($subscription)) {
+				throw new NotFoundException('Invalid subscription');
+			}
+			$this->request->onlyAllow('post', 'delete');
+			if ($this->Subscription->delete($subscription['Subscription']['id'])) {
+				$this->Session->setFlash('Unsubscribed.');
+			} else {
+				$this->Session->setFlash('Could not unsubscribe! MUAHAHAHA!!');
+			}
 		}
 		$this->redirect(array('action' => 'index'));
 	}
+	
 /**
  * add method
  *

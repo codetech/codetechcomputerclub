@@ -19,26 +19,28 @@
 			<td><?php echo h($project['Project']['status']); ?></td>
 		</tr>
 		<tr>
-			<th colspan="3">Involved Members</th>
+			<th colspan="3">Subscribed Members</th>
 			<td rowspan="2">
-			<?php if($isSubscribed):?>
-			<?php echo $this->Form->create(null, array('url' => array('controller' => 'projects', 'action' => 'unsubscribe')));?> 
-			<?php echo $this->Form->submit('Un-Subscribe',array('class'=>'button-small gray')); ?> 
+			<?php if ($isSubscribed): ?>
+				<?php echo $this->Form->create(null, array('url' => array('controller' => 'projects', 'action' => 'unsubscribe'))); ?> 
+				<?php echo $this->Form->submit('Unsubscribe', array('class' => 'button-small gray')); ?> 
 			<?php else: ?>
-			<?php echo $this->Form->create(null, array('url' => array('controller' => 'projects', 'action' => 'subscribe'))); ?> 
-			<?php echo $this->Form->submit('Subscribe',array('class'=>'button-small')); ?> 
+				<?php echo $this->Form->create(null, array('url' => array('controller' => 'projects', 'action' => 'subscribe'))); ?> 
+				<?php echo $this->Form->submit('Subscribe', array('class'=>'button-small')); ?> 
 			<?php endif;?>
-			<?php echo $this->Form->hidden(null,array('value'=>$project['Project']['id']));?>
+			<?php echo $this->Form->hidden(null, array('value' => $project['Project']['id'])); ?>
 			<?php echo $this->Form->end(); ?> 
 			</td>
 		</tr>
 		<tr>
 			<td colspan="3">
-				<?php if (isset($users)): ?>
-					<?php for ($i = 0, $j = count($users); $i < $j; $i++): ?>
-						<?php $user = $users[$i]; ?>
+				<?php if (!empty($subscribedUsers)): ?>
+					<?php for ($i = 0, $j = count($subscribedUsers); $i < $j; $i++): ?>
+						<?php $user = $subscribedUsers[$i]; ?>
 						<?php echo $this->Html->link($user['name'], array('controller' => 'users', 'action' => 'view', $user['id'])); ?><?php if ($i !== $j - 1): ?>, <?php endif; ?>
 					<?php endfor; ?>
+				<?php else: ?>
+					No subscribers yet!
 				<?php endif; ?>
 			</td>
 		</tr>

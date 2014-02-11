@@ -134,19 +134,6 @@ class User extends AppModel {
  * @var array
  */
 	public $hasAndBelongsToMany = array(
-		'Project' => array(
-			'className' => 'Project',
-			'joinTable' => 'projects_users',
-			'foreignKey' => 'user_id',
-			'associationForeignKey' => 'project_id',
-			'unique' => 'keepExisting',
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'finderQuery' => '',
-		),
 		'Gateway' => array(
 			'className' => 'Gateway',
 			'joinTable' => 'gateways_users',
