@@ -16,22 +16,17 @@ class EmailComponent extends Component {
 		
 		// Grab all users who have opted to receive emails, plus any optional
 		// extra conditions.
+		$defaultConditions = array('User.receiveemail' => true);
+		$finalConditions = array_merge($defaultConditions, $conditions);
 		$emails = $this->User->find('list', array(
-			'conditions' => array_merge(array(
-				'User.receiveemail' => true),
-				$conditions
-			),
+			'conditions' => $finalConditions,
 			'fields' => array('User.email')
 		));
 		
-		// Split the emails list so that there will be one "to" address
-		// and the rest will be bccs.
-		$firstEmail = array_shift($emails);
 		$Email = new CakeEmail();
 		$Email->config('gmail')
 			->template('default', null)
 			->emailFormat('both')
-			->to($firstEmail)
 			->bcc($emails)
 			->subject($subject)
 			->viewVars(array(
@@ -51,12 +46,16 @@ class EmailComponent extends Component {
 		$this->User = ClassRegistry::init('User');
 		
 		// Select only relevant phone and address information.
+		// TODO: Write a smarter query that doesn't grab users who haven't
+		// set their gateways. The current result set is a bit redundant;
+		// the if-statement takes care of it later but it's messy.
+		$defaultConditions = array(
+			'User.receivesms' => true,
+			'User.phone !=' => ''
+		);
+		$finalConditions = array_merge($defaultConditions, $conditions);
 		$dataset = $this->User->find('all', array(
-			'conditions' => array_merge(array(
-				'User.receivesms' => true,
-				'User.phone !=' => ''),
-				$conditions
-			),
+			'conditions' => $finalConditions,
 			'fields' => array('User.phone'),
 			'contain' => array('Gateway.address'),
 		));
@@ -64,20 +63,19 @@ class EmailComponent extends Component {
 		// Generate SMS email addresses.
 		$emails = array();
 		foreach ($dataset as $data) {
-			$onlyTheDigits = preg_replace('/[^0-9]/', '', $data['User']['phone']);
-			foreach ($data['Gateway'] as $gateway) {
-				array_push($emails, $onlyTheDigits . '@' . $gateway['address']);
+			if (isset($data['Gateway']) &&
+				isset($data['Gateway']) &&
+				!empty($data['Gateway'])) {
+				
+				$onlyTheDigits = preg_replace('/[^0-9]/', '', $data['User']['phone']);
+				array_push($emails, $onlyTheDigits . '@' . $data['Gateway'][0]['address']);
 			}
 		}
 		
-		// Split the emails list so that there will be one "to" address
-		// and the rest will be bccs.
-		$firstEmail = array_shift($emails);
 		$Email = new CakeEmail();
 		$Email->config('gmail')
 			->template('default', null)
 			->emailFormat('text')
-			->to($firstEmail)
 			->bcc($emails)
 			->viewVars(array(
 				'textContent' => $message,
