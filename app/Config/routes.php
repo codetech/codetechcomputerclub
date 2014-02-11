@@ -63,7 +63,7 @@
 	Router::connect('/projects', array('controller' => 'projects', 'action' => 'index'));
 	Router::connect('/projects/:action/*',
 		array('controller' => 'projects'),
-		array('action' => 'index|add|edit|delete')
+		array('action' => 'index|add|edit|delete|subscribe|unsubscribe')
 	);
 	Router::connect('/projects/*', array('controller' => 'projects', 'action' => 'view'));
 	
