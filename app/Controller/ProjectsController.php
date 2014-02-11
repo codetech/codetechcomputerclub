@@ -71,14 +71,16 @@ class ProjectsController extends AppController {
 		if (isset($project['User'])) {
 			$users = array();
 			foreach ($project['User'] as $key => $user) {
-				//if the loged-in user is subscribed
 				if (is_numeric($key)){
 					array_push($users, $user);
+					//if the loged-in user is subscribed
 					if($user['id'] == $loggedInUser['id']) $isSubscribed = true;
 				}
 			}
 			$this->set('users', $users);
 		}
+		var_dump($users);
+		exit;
 		$this->set('isOwner', isset($loggedInUser) && $this->Project->isOwnedBy($id, $loggedInUser['id']));
 		$this->set('isSubscribed', $isSubscribed);
 		$this->set('project', $project);
@@ -89,9 +91,24 @@ class ProjectsController extends AppController {
  * @return void
  */
 	public function subscribe() {
-		if ($this->request->is('post')) {
-
-			$this->redirect(array('action' => 'view'));
+		$this->loadModel('Subscription');
+		if ($this->request->is('post')) { 
+			$post = $this->Project->find('first', 
+				array('conditions' => array('Project.id' => $this->data['Project'] )));
+			if (!$post===null) {
+				throw new NotFoundException(__('Invalid project'));
+			}
+			$sub = $this->Subscription->find('first', 
+				array('conditions' => array(
+					'Subscription.project_Id' => $this->data['Project'],
+					'Subscription.user_Id' => $this->Auth->user('id') )));
+			if(empty($sub)){
+				$this->Subscription->save(array(
+					'project_id' => $this->data['Project'],
+					'user_id' => $this->Auth->user('id')
+					));
+			}
+			$this->redirect(array('action' => 'view', $post['Project']['slug']));
 		}
 		$this->redirect(array('action' => 'index'));
 	}
@@ -194,11 +211,10 @@ class ProjectsController extends AppController {
  */
 	public function isAuthorized($user) {
 		
-		// All registered users can add projects.
-		if ($this->action === 'add') {
+		// All registered users can add projects, subscribe, unsubscribe.
+ 		if (in_array($this->action, array('add', 'subscribe', 'unsubscribe'))) {
 			return true;
 		}
-
 		// The owner of a project can edit and delete it.
 		if (in_array($this->action, array('edit', 'delete'))) {
 			$projectId = $this->request->params['pass'][0];
