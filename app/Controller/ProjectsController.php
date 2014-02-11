@@ -60,26 +60,52 @@ class ProjectsController extends AppController {
 		if (empty($project)) {
 			throw new NotFoundException('Invalid project.');
 		}
-		$this->set('project', $project);
-		
-		$loggedInUser = $this->Auth->user();
-		$this->set('isOwner', isset($loggedInUser) && $this->Project->isOwnedBy($id, $loggedInUser['id']));
-		
 		// Filter the users array into a regularly-indexed one.
 		// NOTE: CakePHP automatically generates arrays that have a bunch of
 		// data on the owner of the Project, mixed-in with numerically-indexed
 		// array items containing data on each project participant. Because
 		// of this you can't very easily iterate over it, so a filtered array
 		// makes iterating less painful.
+		$isSubscribed = false;
+		$loggedInUser = $this->Auth->user();
 		if (isset($project['User'])) {
 			$users = array();
 			foreach ($project['User'] as $key => $user) {
-				if (is_numeric($key)) array_push($users, $user);
+				//if the loged-in user is subscribed
+				if (is_numeric($key)){
+					array_push($users, $user);
+					if($user['id'] == $loggedInUser['id']) $isSubscribed = true;
+				}
 			}
 			$this->set('users', $users);
 		}
+		$this->set('isOwner', isset($loggedInUser) && $this->Project->isOwnedBy($id, $loggedInUser['id']));
+		$this->set('isSubscribed', $isSubscribed);
+		$this->set('project', $project);
 	}
+/**
+ * subscribe method
+ *
+ * @return void
+ */
+	public function subscribe() {
+		if ($this->request->is('post')) {
 
+			$this->redirect(array('action' => 'view'));
+		}
+		$this->redirect(array('action' => 'index'));
+	}
+/**
+ * unsubscribe method
+ *
+ * @return void
+ */
+	public function unsubscribe() {
+		if ($this->request->is('post')) {
+
+		}
+		$this->redirect(array('action' => 'index'));
+	}
 /**
  * add method
  *

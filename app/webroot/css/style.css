@@ -561,3 +561,24 @@ table.wide {
 	background: #efefef;
 	color: #c73e14;
 }
+
+.pull-right {
+  float: right !important;
+  top:-10px;
+}
+input[type="submit"].button-small{
+	font-size: 1.25em;
+	font-weight: 200;
+	padding: 5px 5px 5px 5px;
+	width:100%;
+}
+input[type="submit"].gray{
+		box-shadow: none;
+		background-image: -moz-linear-gradient(top, #666, #777);
+		background-image: -webkit-linear-gradient(top, #666, #777);
+		background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#666), to(#777));
+		background-image: -ms-linear-gradient(top, #666, #777);
+		background-image: -o-linear-gradient(top, #666, #777);
+		background-image: linear-gradient(top, #666, #777);
+		text-shadow: -1px -1px 1px rgba(0,0,0,0.5);
+}
