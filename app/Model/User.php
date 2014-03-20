@@ -167,22 +167,24 @@ class User extends AppModel {
  */
 	public function beforeSave($options = array()) {
 		
-		$id = $this->data[$this->alias][$this->primaryKey];
+		if (isset($this->data[$this->alias][$this->primaryKey])) {
+			$id = $this->data[$this->alias][$this->primaryKey];
+			
+			$imageDir = WWW_ROOT . 'img' . DS . 'users' . DS . $id . DS;
 		
-		$imageDir = WWW_ROOT . 'img' . DS . 'users' . DS . $id . DS;
-		
-		// If any data changed that has images generated for it, delete the
-		// outdated images so that new ones will be generated.
-		if (isset($this->data[$this->alias]['email'])) {
-			$emailImage = $imageDir . 'email.png';
-			if (file_exists($emailImage)) {
-				unlink($emailImage);
+			// If any data changed that has images generated for it, delete the
+			// outdated images so that new ones will be generated.
+			if (isset($this->data[$this->alias]['email'])) {
+				$emailImage = $imageDir . 'email.png';
+				if (file_exists($emailImage)) {
+					unlink($emailImage);
+				}
 			}
-		}
-		if (isset($this->data[$this->alias]['phone'])) {
-			$phoneImage = $imageDir . 'phone.png';
-			if (file_exists($phoneImage)) {
-				unlink($phoneImage);
+			if (isset($this->data[$this->alias]['phone'])) {
+				$phoneImage = $imageDir . 'phone.png';
+				if (file_exists($phoneImage)) {
+					unlink($phoneImage);
+				}
 			}
 		}
 		

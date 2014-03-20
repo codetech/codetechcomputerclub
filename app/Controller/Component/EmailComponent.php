@@ -68,7 +68,8 @@ class EmailComponent extends Component {
 				!empty($data['Gateway'])) {
 				
 				$onlyTheDigits = preg_replace('/[^0-9]/', '', $data['User']['phone']);
-				array_push($emails, $onlyTheDigits . '@' . $data['Gateway'][0]['address']);
+				$emailAddress = $onlyTheDigits . '@' . $data['Gateway'][0]['address'];
+				array_push($emails, $emailAddress);
 			}
 		}
 		

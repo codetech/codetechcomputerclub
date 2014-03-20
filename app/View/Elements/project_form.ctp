@@ -49,7 +49,6 @@
 				'type' => 'checkbox',
 				'checked' => 'true'
 			));
-			echo $this->Form->input('User');
 		?>
 	</fieldset>
 <?php echo $this->Form->end('Submit Project'); ?>

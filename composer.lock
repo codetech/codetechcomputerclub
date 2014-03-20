@@ -7,16 +7,16 @@
     "packages": [
         {
             "name": "cakephp/debug_kit",
-            "version": "2.2.2",
+            "version": "2.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/debug_kit.git",
-                "reference": "0dd9f6cf6250817052b6a7cf2cc0d2d8d7e26e90"
+                "reference": "fce9fca6e2e54469c4826d26392322d3f2e3cb9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/debug_kit/zipball/0dd9f6cf6250817052b6a7cf2cc0d2d8d7e26e90",
-                "reference": "0dd9f6cf6250817052b6a7cf2cc0d2d8d7e26e90",
+                "url": "https://api.github.com/repos/cakephp/debug_kit/zipball/fce9fca6e2e54469c4826d26392322d3f2e3cb9d",
+                "reference": "fce9fca6e2e54469c4826d26392322d3f2e3cb9d",
                 "shasum": ""
             },
             "require": {
@@ -52,20 +52,20 @@
                 "debug",
                 "kit"
             ],
-            "time": "2013-11-07 18:15:29"
+            "time": "2014-02-01 21:15:24"
         },
         {
             "name": "composer/installers",
-            "version": "v1.0.9",
+            "version": "v1.0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "8e3e734c50b8f60228baf439d5ab16c57d67f6ce"
+                "reference": "9a1fd4e191beaa5cab79c05f923d8bcdd01b4e94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/8e3e734c50b8f60228baf439d5ab16c57d67f6ce",
-                "reference": "8e3e734c50b8f60228baf439d5ab16c57d67f6ce",
+                "url": "https://api.github.com/repos/composer/installers/zipball/9a1fd4e191beaa5cab79c05f923d8bcdd01b4e94",
+                "reference": "9a1fd4e191beaa5cab79c05f923d8bcdd01b4e94",
                 "shasum": ""
             },
             "replace": {
@@ -102,6 +102,7 @@
             "description": "A multi-framework Composer library installer",
             "homepage": "http://composer.github.com/installers/",
             "keywords": [
+                "Craft",
                 "Hurad",
                 "MODX Evo",
                 "OXID",
@@ -134,7 +135,7 @@
                 "zend",
                 "zikula"
             ],
-            "time": "2014-01-27 03:45:57"
+            "time": "2014-02-12 21:21:55"
         },
         {
             "name": "ezyang/htmlpurifier",
