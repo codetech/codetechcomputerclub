@@ -59,10 +59,10 @@ class CommentsController extends AppController {
 				$this->request->data('Comment.author', $user['name']);
 			}
 			if ($this->Comment->save($this->request->data)) {
-				$this->Session->setFlash(__('The comment has been saved.'));
+				$this->Session->setFlash('The comment has been saved.', 'flashInfo');
 				return $this->redirect($this->referer());
 			} else {
-				$this->Session->setFlash(__('The comment could not be saved. Please, try again.'));
+				$this->Session->setFlash('The comment could not be saved. Please, try again.', 'flashWarning');
 			}
 		}
 		$posts = $this->Comment->Post->find('list');
@@ -85,10 +85,10 @@ class CommentsController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Comment->save($this->request->data)) {
-				$this->Session->setFlash(__('The comment has been saved.'));
+				$this->Session->setFlash('The comment has been saved.', 'flashInfo');
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The comment could not be saved. Please, try again.'));
+				$this->Session->setFlash('The comment could not be saved. Please, try again.', 'flashWarning');
 			}
 		} else {
 			$options = array('conditions' => array('Comment.' . $this->Comment->primaryKey => $id));
@@ -115,9 +115,9 @@ class CommentsController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Comment->delete()) {
-			$this->Session->setFlash(__('The comment has been deleted.'));
+			$this->Session->setFlash('The comment has been deleted.', 'flashInfo');
 		} else {
-			$this->Session->setFlash(__('The comment could not be deleted. Please, try again.'));
+			$this->Session->setFlash('The comment could not be deleted. Please, try again.', 'flashWarning');
 		}
 		return $this->redirect($this->referer());
 	}

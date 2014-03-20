@@ -75,10 +75,10 @@ class PostsController extends AppController {
 			$this->request->data('Post.user_id', $this->Auth->user('id'));
 			$this->Post->create();
 			if ($this->Post->save($this->request->data)) {
-				$this->Session->setFlash(__('The post has been saved.'));
+				$this->Session->setFlash('The post has been saved.', 'flashInfo');
 				return $this->redirect(array('action' => 'view', $this->Post->id));
 			} else {
-				$this->Session->setFlash(__('The post could not be saved. Please, try again.'));
+				$this->Session->setFlash('The post could not be saved. Please, try again.', 'flashWarning');
 			}
 		}
 		$projects = $this->Post->Project->find('list');
@@ -99,10 +99,10 @@ class PostsController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Post->save($this->request->data)) {
-				$this->Session->setFlash(__('The post has been saved.'));
+				$this->Session->setFlash('The post has been saved.', 'flashInfo');
 				return $this->redirect(array('action' => 'view', $this->Post->id));
 			} else {
-				$this->Session->setFlash(__('The post could not be saved. Please, try again.'));
+				$this->Session->setFlash('The post could not be saved. Please, try again.', 'flashWarning');
 			}
 		} else {
 			$options = array('conditions' => array('Post.' . $this->Post->primaryKey => $id));
@@ -127,9 +127,9 @@ class PostsController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Post->delete()) {
-			$this->Session->setFlash(__('The post has been deleted.'));
+			$this->Session->setFlash('The post has been deleted.', 'flashInfo');
 		} else {
-			$this->Session->setFlash(__('The post could not be deleted. Please, try again.'));
+			$this->Session->setFlash('The post could not be deleted. Please, try again.', 'flashInfo');
 		}
 		return $this->redirect(array('action' => 'index'));
 	}

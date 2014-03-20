@@ -156,10 +156,10 @@ class UsersController extends AppController {
 				->data('User.position', 'Member')
 				->data('User.admin', 0);
 			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash(__('The user has been saved.'));
+				$this->Session->setFlash('The user has been saved.', "flashSuccess");
 				return $this->redirect(array('action' => 'add'));
 			} else {
-				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+				$this->Session->setFlash('The user could not be saved. Please, try again.', "flashWarning");
 			}
 		}
 		$gateways = $this->User->Gateway->find('list');
@@ -175,14 +175,14 @@ class UsersController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->User->exists($id)) {
-			throw new NotFoundException(__('Invalid user'));
+			throw new NotFoundException('Invalid user');
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash(__('The user has been saved.'));
+				$this->Session->setFlash('The changes have been made.', "flashSuccess");
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+				$this->Session->setFlash('The changes could not be saved. Please, try again.', "flashWarning");
 			}
 		} else {
 			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
@@ -206,9 +206,9 @@ class UsersController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->User->delete()) {
-			$this->Session->setFlash(__('The user has been deleted.'));
+			$this->Session->setFlash('The user has been deleted.', "flashWarning");
 		} else {
-			$this->Session->setFlash(__('The user could not be deleted. Please, try again.'));
+			$this->Session->setFlash('The user could not be deleted. Please, try again.', "flashWarning");
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
@@ -219,12 +219,13 @@ class UsersController extends AppController {
  * @return void
  */
 	public function login() {
+		$this->Auth->flashElement = 'flashInfo';
 		if ($this->request->is('post')) {
 			if ($this->Auth->login()) {
-				$this->Session->setFlash(__('Logged in.'));
+				$this->Session->setFlash('Logged in.', 'flashSuccess');
 				return $this->redirect($this->Auth->redirectUrl());
 			}
-			$this->Session->setFlash(__('Invalid email or password, please try again.'));
+			$this->Session->setFlash('Invalid email or password, please try again.', "flashWarning");
 		}
 	}
 
@@ -234,7 +235,7 @@ class UsersController extends AppController {
  * @return void
  */
 	public function logout() {
-		$this->Session->setFlash(__('Logged out.'));
+		$this->Session->setFlash('Logged out.', 'flashInfo');
 		return $this->redirect($this->Auth->logout());
 	}
 	
@@ -249,10 +250,10 @@ class UsersController extends AppController {
 		}
 		if (!empty($this->data)) {
 			if ($this->User->save($this->data)) {
-				$this->Session->setFlash('Password has been changed.');
+				$this->Session->setFlash('Password has been changed.', 'flashInfo');
 				return $this->redirect($this->Auth->redirectUrl());
 			} else {
-				$this->Session->setFlash('Password could not be changed.');
+				$this->Session->setFlash('Password could not be changed.', 'flashWarning');
 			}
 		} else {
 			$this->data = $this->User->findById($this->Auth->user('id'));
@@ -274,7 +275,7 @@ class UsersController extends AppController {
 				$this->request->data['Email']['html_message'],
 				$this->request->data['Email']['text_message']
 			);
-			$this->Session->setFlash('The emails have been sent.');
+			$this->Session->setFlash('The emails have been sent.', 'flashInfo');
 			return $this->redirect(array('action' => 'index'));
 		}
 	}
@@ -292,7 +293,7 @@ class UsersController extends AppController {
 			$this->Email->sendText(
 				$this->request->data['Email']['text_message']
 			);
-			$this->Session->setFlash('The texts have been sent.');
+			$this->Session->setFlash('The texts have been sent.', 'flashInfo');
 			return $this->redirect(array('action' => 'index'));
 		}
 	}

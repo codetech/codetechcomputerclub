@@ -112,9 +112,9 @@ class ProjectsController extends AppController {
 					'project_id' => $this->data['Project'],
 					'user_id' => $this->Auth->user('id')
 				));
-				$this->Session->setFlash('Subscribed to the project.');
+				$this->Session->setFlash('Subscribed to the project.', "flashInfo");
 			} else {
-				$this->Session->setFlash('Already subscribed.');
+				$this->Session->setFlash('Already subscribed.', "flashWarning");
 			}
 			$this->redirect(array('action' => 'view', $project['Project']['slug']));
 		}
@@ -142,9 +142,9 @@ class ProjectsController extends AppController {
 			}
 			$this->request->onlyAllow('post', 'delete');
 			if ($this->Subscription->delete($subscription['Subscription']['id'])) {
-				$this->Session->setFlash('Unsubscribed.');
+				$this->Session->setFlash('You are now Unsubscribed.', 'flashInfo');
 			} else {
-				$this->Session->setFlash('Could not unsubscribe! MUAHAHAHA!!');
+				$this->Session->setFlash('Could not unsubscribe! MUAHAHAHA!!', 'flashWarning');
 			}
 		}
 		$this->redirect(array('action' => 'index'));
@@ -161,10 +161,10 @@ class ProjectsController extends AppController {
 			$this->request->data('Project.user_id', $this->Auth->user('id'));
 			$this->Project->create();
 			if ($this->Project->save($this->request->data)) {
-				$this->Session->setFlash(__('The project has been saved.'));
+				$this->Session->setFlash('The project has been saved.', 'flashInfo');
 				return $this->redirect(array('action' => 'view', $this->Project->id));
 			} else {
-				$this->Session->setFlash(__('The project could not be saved. Please, try again.'));
+				$this->Session->setFlash('The project could not be saved. Please, try again.', 'flashWarning');
 			}
 		}
 		$users = $this->Project->User->find('list');

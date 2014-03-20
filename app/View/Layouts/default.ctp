@@ -49,6 +49,7 @@
 	<?php
 		echo $this->fetch('css');
 		echo $this->fetch('script');
+		echo $this->Html->css('font-awesome');
 	?>
 </head>
 <body>
@@ -87,23 +88,13 @@
 	<div id="content-wrapper">
 		<div id="content" class="<?php echo $this->fetch('content_class'); ?>">
 			<div class="container">
+				<?php echo $this->Session->flash(); ?>
 				<?php
-					$flash = $this->Session->flash();
 					$authFlash = $this->Session->flash('auth');
-				?>
-				<?php if ( $flash ): ?>
+					if ( $authFlash ): ?>
 					<div class="row">
 						<div class="12u">
-							<section>
-								<?php echo $flash; ?>
-							</section>
-						</div>
-					</div>
-				<?php endif; ?>
-				<?php if ( $authFlash ): ?>
-					<div class="row">
-						<div class="12u">
-							<section>
+							<section class="flash danger">
 								<?php echo $authFlash; ?>
 							</section>
 						</div>

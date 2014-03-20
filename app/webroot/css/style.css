@@ -582,3 +582,22 @@ input[type="submit"].gray{
 		background-image: linear-gradient(top, #666, #777);
 		text-shadow: -1px -1px 1px rgba(0,0,0,0.5);
 }
+.flash{
+	padding:10px !important;
+}
+.flash i{
+	margin-left:10px !important;
+	margin-right:10px !important;
+}
+.success{
+	background: #ccff99 !important;
+}
+.warning{
+	background: #ffff99 !important;
+}
+.info{
+	background: #9999ff !important;
+}
+.danger{
+	background: #ff9999 !important;
+}
