@@ -60,7 +60,7 @@ class UsersController extends AppController {
 				return true;
 			}
 		}
-		
+
 		// Refer back to the parent authorization function if these checks fail.
 		return parent::isAuthorized($user);
 	}
@@ -84,24 +84,24 @@ class UsersController extends AppController {
  * @return void
  */
 	public function view($id = null) {
-		
+
 		// Make $user available to some callback functions.
 		global $user;
-		
+
 		if (!$this->User->exists($id)) {
 			throw new NotFoundException(__('Invalid user'));
 		}
-		
+
 		$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
 		$user = $this->User->find('first', $options);
-		
+
 		$loggedInUser = $this->Auth->user();
-		
+
 		$this->set(array(
 			'user' => $user,
 			'isSameUser' => ($loggedInUser['id'] === $id),
 		));
-		
+
 		// Create images of user data to protect it from scrapers.
 		if ($user['User']['displayemail'] && !empty($user['User']['email'])) {
 			$this->set('emailImagePath', $this->Picturesque->userPreset(
@@ -115,11 +115,11 @@ class UsersController extends AppController {
 				'phone',
 				$user['User']['id']));
 		}
-		
+
 		// If the user is associated with any projects, create lists of
 		// the ones he has started and those which he is associated with.
 		if (!empty($user['Project'])) {
-			
+
 			// Filter-out all duplicate projects (if the user owns any
 			// projects, those are listed twice).
 			$projects = array_filter($user['Project'], function ($item) {
@@ -129,13 +129,13 @@ class UsersController extends AppController {
 					return true;
 				}
 			});
-			
+
 			// Filter projects the user has started.
 			$projectsStarted = array_filter($projects, function ($item) {
 				global $user;
 				return $item['user_id'] === $user['User']['id'];
 			});
-			
+
 			$this->set(array(
 				'projects' => $projects,
 				'projectsStarted' => $projectsStarted
@@ -156,10 +156,36 @@ class UsersController extends AppController {
 				->data('User.position', 'Member')
 				->data('User.admin', 0);
 			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash(__('The user has been saved.'));
-				return $this->redirect(array('action' => 'add'));
+
+                            // Monkey patch to send emails.
+                            // TODO: Put this wherever it actually should go.
+
+                            $textMessage = 'Hello, thanks for joining codeTech Computer Club!\n' .
+                                'We are currently trying to choose a meeting time for this semester.\n' .
+                                'Please enter the times you are available at the following address:\n' .
+                                'http://doodle.com/bq9vg7kagvv6mzvs';
+
+                            $htmlMessage = 'Hello, thanks for joining codeTech Computer Club!<br>' .
+                                'We are currently trying to choose a meeting time for this semester.<br>' .
+                                'Please enter the times you are available at the following address:<br>' .
+                                '<a href="http://doodle.com/bq9vg7kagvv6mzvs">Click here!</a>';
+
+                            $Email = new CakeEmail();
+                            $Email->config('gmail')
+                                  ->template('default', null)
+                                  ->emailFormat('both')
+                                  ->to($this->request->data['User']['email'])
+                                  ->subject('Welcome to codeTech!')
+                                  ->viewVars(array(
+                                      'textContent' => $textMessage,
+                                      'htmlContent' => $htmlMessage,
+                                  ))
+                                  ->send();
+
+                            $this->Session->setFlash(__('The user has been saved.'));
+                            return $this->redirect(array('action' => 'add'));
 			} else {
-				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                            $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
 			}
 		}
 		$gateways = $this->User->Gateway->find('list');
@@ -237,7 +263,7 @@ class UsersController extends AppController {
 		$this->Session->setFlash(__('Logged out.'));
 		return $this->redirect($this->Auth->logout());
 	}
-	
+
 /**
  * Change password page.
  *
@@ -262,9 +288,9 @@ class UsersController extends AppController {
 /**
  * Mass email sending page. Sends the posted email out to all users
  * who have opted to receive emails.
- * 
+ *
  * Only accessible by admins.
- * 
+ *
  * @return void
  */
 	public function send_email() {
@@ -282,9 +308,9 @@ class UsersController extends AppController {
 /**
  * Mass text message sending page. Sends the posted text out to all users
  * who have opted to receive texts.
- * 
+ *
  * Only accessible by admins.
- * 
+ *
  * @return void
  */
 	public function send_text() {
