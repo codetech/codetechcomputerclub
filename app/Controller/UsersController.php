@@ -156,36 +156,40 @@ class UsersController extends AppController {
 				->data('User.position', 'Member')
 				->data('User.admin', 0);
 			if ($this->User->save($this->request->data)) {
+				
+				// Monkey patch to send emails.
+				// TODO: Put this wherever it actually should go.
 
-                            // Monkey patch to send emails.
-                            // TODO: Put this wherever it actually should go.
+				$doodleLink = 'https://doodle.com/sspghdi67p3dx3ka';
 
-                            $textMessage = 'Hello, thanks for joining codeTech Computer Club!\n' .
-                                'We are currently trying to choose a meeting time for this semester.\n' .
-                                'Please enter the times you are available at the following address:\n' .
-                                'https://doodle.com/sspghdi67p3dx3ka';
+				$textMessage = 'Hello, thanks for joining codeTech Computer Club!\n' .
+				 'We are currently trying to choose a meeting time for this semester.\n' .
+				 'Please enter the times you are available at the following address:\n' .
+				 $doodleLink;
 
-                            $htmlMessage = 'Hello, thanks for joining codeTech Computer Club!<br>' .
-                                'We are currently trying to choose a meeting time for this semester.<br>' .
-                                'Please enter the times you are available at the following address:<br>' .
-                                '<a href="https://doodle.com/sspghdi67p3dx3ka">Click here!</a>';
+				$htmlMessage = 'Hello, thanks for joining codeTech Computer Club!<br>' .
+				 'We are currently trying to choose a meeting time for this semester.<br>' .
+				 'Please enter the times you are available at the following address:<br>' .
+				 '<a href="' . $doodleLink . '">Click here!</a>';
 
-                            $Email = new CakeEmail();
-                            $Email->config('gmail')
-                                  ->template('default', null)
-                                  ->emailFormat('both')
-                                  ->to($this->request->data['User']['email'])
-                                  ->subject('Welcome to codeTech!')
-                                  ->viewVars(array(
-                                      'textContent' => $textMessage,
-                                      'htmlContent' => $htmlMessage,
-                                  ))
-                                  ->send();
+				$Email = new CakeEmail();
+				$Email->config('gmail')
+					  ->template('default', null)
+					  ->emailFormat('both')
+					  ->to($this->request->data['User']['email'])
+					  ->subject('Welcome to codeTech!')
+					  ->viewVars(array(
+						  'textContent' => $textMessage,
+						  'htmlContent' => $htmlMessage,
+					  ))
+					  ->send();
 
-                            $this->Session->setFlash(__('The user has been saved.'));
-                            return $this->redirect(array('action' => 'add'));
+				$this->Session->setFlash(__('Signup complete! Redirecting to doodle.com...'));
+				// TODO: Some weird error shows up here... no idea how to get rid of it.
+				return $this->header("refresh:2; url='" . $doodleLink . "'");
+				// return $this->redirect(array('action' => 'add'));
 			} else {
-                            $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Signup failed. Please, try again.'));
 			}
 		}
 		$gateways = $this->User->Gateway->find('list');
