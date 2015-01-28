@@ -30,6 +30,12 @@ Installation
 
 The website has dependencies that need to be installed with [Composer](https://getcomposer.org/).
 
+### Note on PHP:
+
+You should open php.ini, Ctrl+F for `display_errors`, and set it to `True`. This
+way PHP will actually throw errors, which will make the installation process
+easier in case anything goes wrong.
+
 ### Linux / Mac:
 
 1. Have git and php installed.
@@ -41,6 +47,18 @@ The website has dependencies that need to be installed with [Composer](https://g
 git clone https://github.com/codetech/codetechcomputerclub.git
 cd codetechcomputerclub
 php bin/composer.phar install
+```
+
+Make the cache writable:
+
+```bash
+sudo chmod -R 777 app/tmp/cache/
+```
+
+You might also need to enable `mod_rewrite`:
+
+```bash
+sudo a2enmod rewrite && sudo service apache2 restart
 ```
 
 ### Windows:
