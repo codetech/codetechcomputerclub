@@ -163,12 +163,12 @@ class UsersController extends AppController {
                             $textMessage = 'Hello, thanks for joining codeTech Computer Club!\n' .
                                 'We are currently trying to choose a meeting time for this semester.\n' .
                                 'Please enter the times you are available at the following address:\n' .
-                                'http://doodle.com/bq9vg7kagvv6mzvs';
+                                'https://doodle.com/sspghdi67p3dx3ka';
 
                             $htmlMessage = 'Hello, thanks for joining codeTech Computer Club!<br>' .
                                 'We are currently trying to choose a meeting time for this semester.<br>' .
                                 'Please enter the times you are available at the following address:<br>' .
-                                '<a href="http://doodle.com/bq9vg7kagvv6mzvs">Click here!</a>';
+                                '<a href="https://doodle.com/sspghdi67p3dx3ka">Click here!</a>';
 
                             $Email = new CakeEmail();
                             $Email->config('gmail')
