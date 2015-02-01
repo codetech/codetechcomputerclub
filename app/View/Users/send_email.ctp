@@ -15,6 +15,9 @@
 			<p>
 				The system will attempt to send an HTML email, but some receipts will only accept a text one, so you must prepare two versions just in case.
 			</p>
+			<p>
+				<strong>WARNING!!!</strong> This will take a long time. Do not refresh the page after submitting.
+			</p>
 			<?php
 				echo $this->Form->input('title', array(
 					'type' => 'text'
