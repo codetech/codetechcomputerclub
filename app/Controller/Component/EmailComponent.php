@@ -22,18 +22,20 @@ class EmailComponent extends Component {
 			'conditions' => $finalConditions,
 			'fields' => array('User.email')
 		));
-		
-		$Email = new CakeEmail();
-		$Email->config('gmail')
-			->template('default', null)
-			->emailFormat('both')
-			->bcc($emails)
-			->subject($subject)
-			->viewVars(array(
-				'textContent' => $messagePlain,
-				'htmlContent' => $messageHtml,
-			))
-			->send();
+
+		foreach ($emails as $email) {
+			$Email = new CakeEmail();
+			$Email->config('gmail')
+				  ->template('default', null)
+				  ->emailFormat('both')
+				  ->to($email)
+				  ->subject($subject)
+				  ->viewVars(array(
+					  'textContent' => $messagePlain,
+					  'htmlContent' => $messageHtml,
+				  ))
+				  ->send();
+		}
 	}
 	
 /**
@@ -71,15 +73,17 @@ class EmailComponent extends Component {
 				array_push($emails, $onlyTheDigits . '@' . $data['Gateway'][0]['address']);
 			}
 		}
-		
-		$Email = new CakeEmail();
-		$Email->config('gmail')
-			->template('default', null)
-			->emailFormat('text')
-			->bcc($emails)
-			->viewVars(array(
-				'textContent' => $message,
-			))
-			->send();
+
+		foreach ($emails as $email) {
+			$Email = new CakeEmail();
+			$Email->config('gmail')
+				  ->template('default', null)
+				  ->emailFormat('text')
+				  ->to($email)
+				  ->viewVars(array(
+					  'textContent' => $message,
+				  ))
+				  ->send();
+		}
 	}
 }
