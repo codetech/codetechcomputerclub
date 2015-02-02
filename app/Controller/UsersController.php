@@ -160,7 +160,7 @@ class UsersController extends AppController {
 				// Monkey patch to send emails.
 				// TODO: Put this wherever it actually should go.
 
-				$doodleLink = 'https://doodle.com/sspghdi67p3dx3ka';
+				$doodleLink = 'http://doodle.com/b83ne5irr9nd9q26';
 
 				$textMessage = 'Hello, thanks for joining codeTech Computer Club!\n' .
 				 'We are currently trying to choose a meeting time for this semester.\n' .
