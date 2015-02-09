@@ -55,6 +55,7 @@
 		array('controller' => 'users'),
 		array('action' => 'index|add|edit|delete')
 	);
+	Router::connect('/members/emails', array('controller' => 'users', 'action' => 'list_emails'));
 	Router::connect('/members/*', array('controller' => 'users', 'action' => 'view'));
 
 /**

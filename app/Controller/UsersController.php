@@ -326,4 +326,25 @@ class UsersController extends AppController {
 			return $this->redirect(array('action' => 'index'));
 		}
 	}
+
+/**
+ * List the emails of all users who have opted to receive emails.
+ *
+ * @return void
+ */ 
+	public function list_emails() {
+		$this->User = ClassRegistry::init('User');
+		
+		// Grab all users who have opted to receive emails, plus any optional
+		// extra conditions.
+		$conditions = array('User.receiveemail' => true);
+		$emails = $this->User->find('list', array(
+			'conditions' => $conditions,
+			'fields' => array('User.email')
+		));
+
+		$this->set(array(
+			'emails' => $emails
+		));
+	}
 }
