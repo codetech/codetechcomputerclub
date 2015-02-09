@@ -156,21 +156,65 @@ class UsersController extends AppController {
 				->data('User.position', 'Member')
 				->data('User.admin', 0);
 			if ($this->User->save($this->request->data)) {
-				
-				// Monkey patch to send emails.
-				// TODO: Put this wherever it actually should go.
 
-				$doodleLink = 'http://doodle.com/b83ne5irr9nd9q26';
+				$textMessage = <<<TEXT
+Hey there, new codeTech Computer Club member,
 
-				$textMessage = 'Hello, thanks for joining codeTech Computer Club!\n' .
-				 'We are currently trying to choose a meeting time for this semester.\n' .
-				 'Please enter the times you are available at the following address:\n' .
-				 $doodleLink;
+We have some pretty awesome plans for this semester; from learning new programming languages like Ruby and Python, to setting up TF2 / Minecraft servers (oh, and playing on them, too), you're not gonna want to miss this!
 
-				$htmlMessage = 'Hello, thanks for joining codeTech Computer Club!<br>' .
-				 'We are currently trying to choose a meeting time for this semester.<br>' .
-				 'Please enter the times you are available at the following address:<br>' .
-				 '<a href="' . $doodleLink . '">Click here!</a>';
+We have finalized our schedule. You can download it here:
+
+http://codetechcomputerclub.com/files/resources/codeTechSchedule.pdf
+
+We are meeting Wednesdays from 5:30-8:00PM at the MiraCosta College Oceanside campus; computer science building, room OC4803A. Be there or be really, really lame!
+
+We look forward to meeting you.
+
+- codeTech Computer Club
+
+Kyle San Clemente
+ksanclemente@live.com
+760-484-8190
+
+Jackson Ray Hamilton
+jackson@jacksonrayhamilton.com
+760-805-4304
+
+Fred Young
+fred@perfectcircle.com
+ 
+Website: http://codetechcomputerclub.com/ (or http://codetech.club/!)
+TEXT;
+
+				$htmlMessage = <<<HTML
+<p>Hey there, new codeTech Computer Club member,</p>
+<p>We have some pretty awesome plans for this semester;&nbsp;from learning new programming languages like Ruby and Python, to setting up TF2 / Minecraft&nbsp;servers (oh, and playing on them, too),&nbsp;you're not gonna want to miss this!</p>
+<p>We have finalized our schedule. You can download it here:</p>
+<p><a href="http://codetechcomputerclub.com/files/resources/codeTechSchedule.pdf">http://codetechcomputerclub.com/files/resources/codeTechSchedule.pdf</a></p>
+<p>We are meeting&nbsp;<strong>Wednesdays</strong> from <strong>5:30-8:00PM</strong> at the MiraCosta College Oceanside campus; computer science building, room <strong>OC4803A</strong>. Be there or be really, really lame!</p>
+<p>We look forward to meeting you.</p>
+<p>- codeTech Computer Club</p>
+<table>
+<tbody>
+<tr>
+<td>Kyle San Clemente</td>
+<td><a href="mailto:ksanclemente@live.com">ksanclemente@live.com</a></td>
+<td>760-484-8190</td>
+</tr>
+<tr>
+<td>Jackson Ray Hamilton</td>
+<td><a href="mailto:jackson@jacksonrayhamilton.com" target="_blank">jackson@jacksonrayhamilton.<wbr />com</a></td>
+<td>760-805-4304</td>
+</tr>
+<tr>
+<td>Fred Young</td>
+<td><a href="mailto:fred@perfectcircle.com" target="_blank">fred@perfectcircle.com</a></td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>Website: <a href="http://codetechcomputerclub.com/" target="_blank">http://codetechcomputerclub.com/</a>&nbsp;(or <a href="http://codetech.club">http://codetech.club/</a>!)</p>
+HTML;
 
 				$Email = new CakeEmail();
 				$Email->config('gmail')
@@ -184,10 +228,8 @@ class UsersController extends AppController {
 					  ))
 					  ->send();
 
-				$this->Session->setFlash(__('Signup complete! Redirecting to doodle.com...'));
-				// TODO: Some weird error shows up here... no idea how to get rid of it.
-				return $this->header("refresh:2; url='" . $doodleLink . "'");
-				// return $this->redirect(array('action' => 'add'));
+				$this->Session->setFlash(__('Signup complete!'));
+				return $this->redirect(array('action' => 'add'));
 			} else {
 				$this->Session->setFlash(__('Signup failed. Please, try again.'));
 			}
