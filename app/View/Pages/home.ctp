@@ -57,7 +57,7 @@
 				<li>
 					<img src="/img/jackson-thub.jpg" alt="Jackson Ray Hamilton Thumbnail" />
 					<p>Jackson Hamilton</p>
-					<span><em>Vice President</em> - Web application and game developer</span>
+					<span><em><?php echo $this->NonPresident->getTitle(); ?></em> - Web application and game developer</span>
 				</li>
 				
 			</ul>
