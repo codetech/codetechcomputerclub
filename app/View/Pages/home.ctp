@@ -50,8 +50,8 @@
 					<span><em>Founder</em> -30-year industry professional</span>
 				</li>
 				<li>
-					<img src="/img/kyle-thub.jpg" alt="Kyle San Clemente Thumbnail" />
-					<p>Kyle San Clemente</p>
+					<img src="/img/matt-thub.jpg" alt="Matt Hendricks Thumbnail" />
+					<p>Matt Hendricks</p>
 					<span><em>President</em> - Ambitious software designer and enthusiast</span>
 				</li>
 				<li>
