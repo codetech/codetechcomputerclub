@@ -160,60 +160,37 @@ class UsersController extends AppController {
 				$textMessage = <<<TEXT
 Hey there, new codeTech Computer Club member,
 
-We have some pretty awesome plans for this semester; from learning new programming languages like Ruby and Python, to setting up TF2 / Minecraft servers (oh, and playing on them, too), you're not gonna want to miss this!
+We have some pretty awesome plans for this semester; from learning new programming languages like JavaScript, PHP and Python, to hacking away at the command line with Vim and Emacs, you're not gonna want to miss this!
 
-We have finalized our schedule. You can download it here:
+Our schedule is available here: http://codetechcomputerclub.com/files/resources/Fall2015Schedule.pdf
 
-http://codetechcomputerclub.com/files/resources/codeTechSchedule.pdf
-
-We are meeting Wednesdays from 5:30-8:00PM at the MiraCosta College Oceanside campus; computer science building, room OC4803A. Be there or be really, really lame!
-
-We look forward to meeting you.
+Meetings are on Tuesdays from 6:30-8:30PM at the MiraCosta College Oceanside campus; room OC4607. See ya there!
 
 - codeTech Computer Club
 
-Kyle San Clemente
-ksanclemente@live.com
-760-484-8190
-
-Jackson Ray Hamilton
-jackson@jacksonrayhamilton.com
-760-805-4304
-
-Fred Young
-fred@perfectcircle.com
+Jackson Ray Hamilton - jackson@jacksonrayhamilton.com
+Fred Young - fred@perfectcircle.com
+Nery Chapeton-Lamas - nchapetonlamas@miracosta.edu
  
 Website: http://codetechcomputerclub.com/ (or http://codetech.club/!)
 TEXT;
 
 				$htmlMessage = <<<HTML
 <p>Hey there, new codeTech Computer Club member,</p>
-<p>We have some pretty awesome plans for this semester;&nbsp;from learning new programming languages like Ruby and Python, to setting up TF2 / Minecraft&nbsp;servers (oh, and playing on them, too),&nbsp;you're not gonna want to miss this!</p>
-<p>We have finalized our schedule. You can download it here:</p>
-<p><a href="http://codetechcomputerclub.com/files/resources/codeTechSchedule.pdf">http://codetechcomputerclub.com/files/resources/codeTechSchedule.pdf</a></p>
-<p>We are meeting&nbsp;<strong>Wednesdays</strong> from <strong>5:30-8:00PM</strong> at the MiraCosta College Oceanside campus; computer science building, room <strong>OC4803A</strong>. Be there or be really, really lame!</p>
-<p>We look forward to meeting you.</p>
+
+<p>We have some pretty awesome plans for this semester; from learning new programming languages like JavaScript, PHP and Python, to hacking away at the command line with Vim and Emacs, you're not gonna want to miss this!</p>
+
+<p>Our schedule is available here: <a href="http://codetechcomputerclub.com/files/resources/Fall2015Schedule.pdf">http://codetechcomputerclub.com/files/resources/Fall2015Schedule.pdf</a></p>
+
+<p>Meetings are on <strong>Tuesdays</strong> from <strong>6:30-8:30PM</strong> at the MiraCosta College Oceanside campus; room <strong>OC4607</strong>. See ya there!</p>
+
 <p>- codeTech Computer Club</p>
-<table>
-<tbody>
-<tr>
-<td>Kyle San Clemente</td>
-<td><a href="mailto:ksanclemente@live.com">ksanclemente@live.com</a></td>
-<td>760-484-8190</td>
-</tr>
-<tr>
-<td>Jackson Ray Hamilton</td>
-<td><a href="mailto:jackson@jacksonrayhamilton.com" target="_blank">jackson@jacksonrayhamilton.<wbr />com</a></td>
-<td>760-805-4304</td>
-</tr>
-<tr>
-<td>Fred Young</td>
-<td><a href="mailto:fred@perfectcircle.com" target="_blank">fred@perfectcircle.com</a></td>
-<td>&nbsp;</td>
-</tr>
-</tbody>
-</table>
-<p>Website: <a href="http://codetechcomputerclub.com/" target="_blank">http://codetechcomputerclub.com/</a>&nbsp;(or <a href="http://codetech.club">http://codetech.club/</a>!)</p>
+
+<p>Jackson Ray Hamilton - <a href="mailto:jackson@jacksonrayhamilton.com">jackson@jacksonrayhamilton.com</a><br/>
+Fred Young - <a href="mailto:fred@perfectcircle.com">fred@perfectcircle.com</a><br/>
+Nery Chapeton-Lamas - <a href="mailto:nchapetonlamas@miracosta.edu">nchapetonlamas@miracosta.edu</a></p>
+
+<p>Website: <a href="http://codetechcomputerclub.com/">http://codetechcomputerclub.com/</a> (or <a href="http://codetech.club">http://codetech.club/</a>!)</p>
 HTML;
 
 				$Email = new CakeEmail();
