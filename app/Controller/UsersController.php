@@ -21,7 +21,7 @@ class UsersController extends AppController {
  *
  * @var array
  */
-	public $helpers = array('Gravatar');
+	public $helpers = array('Csv', 'Gravatar');
 
 /**
  * Pagination options
@@ -357,13 +357,13 @@ HTML;
 		// Grab all users who have opted to receive emails, plus any optional
 		// extra conditions.
 		$conditions = array('User.receiveemail' => true);
-		$emails = $this->User->find('list', array(
+		$data = $this->User->find('list', array(
 			'conditions' => $conditions,
-			'fields' => array('User.email')
+			'fields' => array('User.email', 'User.name')
 		));
 
 		$this->set(array(
-			'emails' => $emails
+			'data' => $data
 		));
 	}
 }

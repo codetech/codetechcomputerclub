@@ -2,7 +2,10 @@
 
 <section>
 	<h2>Emails</h2>
-	<?php foreach ($emails as $email): ?>
-		<?php echo $email; ?>,
-	<?php endforeach; ?>
+	<p>The following should make for a suitable CSV to import into MailChimp.</p>
+	<p>
+		<?php foreach ($data as $email => $name): ?>
+		    <?php echo h($this->Csv->escapeField($name)); ?>,<?php echo h($this->Csv->escapeField($email)); ?><br/>
+		<?php endforeach; ?>
+	</p>
 </section>
