@@ -5,7 +5,7 @@ codeTech Computer Club was founded at Mira Costa College Oceanside in early-2013
 
 codeTech's website serves a few purposes:
 
-* To allow prospective members can learn about and join the club.
+* To allow prospective members to learn about and join the club.
 * To allow members to collaborate and communicate with each other.
 * To allow members to track the progress of projects, start their own, and share them with members, friends, employers.
 * To provide software and tutorials as resources.
